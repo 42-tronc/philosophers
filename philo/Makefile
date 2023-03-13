@@ -6,7 +6,7 @@
 #    By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 13:33:54 by croy              #+#    #+#              #
-#    Updated: 2023/03/13 14:09:09 by croy             ###   ########lyon.fr    #
+#    Updated: 2023/03/13 14:31:45 by croy             ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,9 +74,6 @@ RM := rm -rf
 OBJ_DIR := obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 
-# LIBFT_DIR := libft/
-# LIBFT_NAME := $(LIBFT_DIR)libft.a
-
 
 # --------- PROJECT VARIABLES ---------
 NAME := philo
@@ -87,15 +84,13 @@ SRC := main.c
 # -------------- RECIPES --------------
 all: makefolder rsc $(NAME)
 
-$(NAME): $(LIBFT_NAME) $(OBJ)
-	${CC} ${CFLAGS} -o $(NAME) $(OBJ) $(LIBFT_NAME)
+$(NAME): $(OBJ)
+	${CC} ${CFLAGS} -o $(NAME) $(OBJ)
 	@echo -e "$(BG_LIGHT_GREEN)Compiled:\t$(RESET) $(FG_WHITE)$(UNDERLINE)$(NAME)$(RESET) has been created."
 
 $(OBJ_DIR)%.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-rsc:
-	@$(MAKE) -sC $(LIBFT_DIR)
 
 makefolder :
 	@mkdir -p $(OBJ_DIR)
@@ -103,20 +98,18 @@ makefolder :
 clean:
 	$(RM) $(OBJ)
 	$(RM) $(OBJ_DIR)
-	@$(MAKE) $@ -sC $(LIBFT_DIR)
 	@echo -e "$(FG_RED)Clean:\t\t $(FG_LIGHT_GRAY)$(ITALIC)$(NAME) object files$(RESET) have been deleted"
 
 fclean: clean
 	$(RM) $(NAME)
-	@$(MAKE) $@ -sC $(LIBFT_DIR)
 	@echo -e "$(FG_RED)FClean:\t\t $(FG_LIGHT_GRAY)$(UNDERLINE)$(NAME)$(RESET) has been deleted."
 
 re: fclean
 	@$(MAKE) rsc
 	@$(MAKE) all
 
-debug: makefolder rsc $(LIBFT_NAME) $(OBJ)
-	${CC} $(FSANITIZE) ${CFLAGS} -o $(NAME) $(OBJ) $(LIBFT_NAME)
+debug: makefolder rsc $(OBJ)
+	${CC} $(FSANITIZE) ${CFLAGS} -o $(NAME) $(OBJ)
 
 run :
 	make re
