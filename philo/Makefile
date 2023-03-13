@@ -6,7 +6,7 @@
 #    By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 13:33:54 by croy              #+#    #+#              #
-#    Updated: 2023/01/17 15:48:31 by croy             ###   ########lyon.fr    #
+#    Updated: 2023/03/13 14:09:09 by croy             ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,14 +74,14 @@ RM := rm -rf
 OBJ_DIR := obj/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 
-LIBFT_DIR := libft/
-LIBFT_NAME := $(LIBFT_DIR)libft.a
+# LIBFT_DIR := libft/
+# LIBFT_NAME := $(LIBFT_DIR)libft.a
 
 
 # --------- PROJECT VARIABLES ---------
-NAME := foobar
-HEADER := foobar.h
-SRC := foobar.c
+NAME := philo
+HEADER := philo.h
+SRC := main.c
 
 
 # -------------- RECIPES --------------
