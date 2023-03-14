@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:46:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/14 12:38:02 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/14 12:49:28 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_atoi(const char *str)
 			sign *= -1;
 		i++;
 	}
-	while (ft_isdigit(str[i]))
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (result != ((result * 10 + ((str[i] - 48) * sign)) / 10))
 			return ((sign + 1) / 2 / -1);
