@@ -6,7 +6,7 @@
 #    By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 13:33:54 by croy              #+#    #+#              #
-#    Updated: 2023/03/13 14:31:45 by croy             ###   ########lyon.fr    #
+#    Updated: 2023/03/14 12:47:05 by croy             ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 # --------- PROJECT VARIABLES ---------
 NAME := philo
 HEADER := philo.h
-SRC := main.c
+SRC := main.c utils.c
 
 
 # -------------- RECIPES --------------
