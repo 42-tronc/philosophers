@@ -6,12 +6,14 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/03/13 18:42:42 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/14 12:37:58 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+#include <stddef.h>
 
 typedef struct s_data
 {
