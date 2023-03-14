@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/13 19:12:43 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/14 12:34:23 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,17 @@ Need to check:
 number_of_philosophers: has to be 1+
 time_to_die: has to be 1+
 */
-int	check_args(char **args)
+
+void	init_data(t_data *data)
+{
+	data->nb_philo = 0;
+	data->eat_time = 0;
+	data->sleep_time = 0;
+	data->death_time = 0;
+	data->eat_count = 0;
+}
+
+int	check_args(char **args, t_data data)
 {
 
 	return 0;
@@ -53,9 +63,13 @@ int	check_args(char **args)
 
 int	main(int argc, char const *argv[])
 {
+	t_data *data;
+
+	data = malloc(sizeof(t_data));
 	if (argc == 5)
 	{
-		if (!check_args(argv))
+		init_data(data);
+		if (!check_args(argv, data))
 			return 1;
 	}
 	return 0;
