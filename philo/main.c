@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maplepy <maplepy@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/16 16:22:41 by maplepy          ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 16:29:29 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	print_status(t_philo philo, int status_code)
 		return;
 }
 
-
 /* void	*philo_routine(t_philo *philo)
 {
 	// EAT
@@ -143,13 +142,13 @@ int	main(int ac, char **av)
 	if (!data)
 		return (1);
 
-	gettimeofday(&start, NULL);
-	data->time = start;
-
 	if (ac >= 5 && ac <= 6)
 	{
 		if (check_args(av, data))
 			return (1);
+
+		gettimeofday(&start, NULL);
+		data->time = start;
 		// printf("MS: %ld\n", start.tv_usec);
 
 	}
