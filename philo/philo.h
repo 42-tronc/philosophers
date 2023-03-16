@@ -32,6 +32,14 @@ typedef struct s_data
 	pthread_mutex_t	print;
 }	t_data;
 
+typedef struct s_philo
+{
+	long			id;
+	long			eat_count;
+	pthread_mutex_t	fork;
+	t_data			*data;
+}	t_philo;
+
 int	ft_atoi(const char *str);
 
 #endif
