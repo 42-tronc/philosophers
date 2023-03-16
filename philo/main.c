@@ -82,6 +82,25 @@ int	check_args(char **av, t_data *data)
 	return (0);
 }
 
+void	print_status(t_philo philo, int status_code)
+{
+	pthread_mutex_lock(&philo.data->print);
+	char	*status[5];
+
+	status[0] = "has taken a fork";
+	status[1] = "is eating";
+	status[2] = "is sleeping";
+	status[3] = "is thinking";
+	status[4] = "died";
+	printf("%ld %s", philo.id, status[status_code]);
+	// printf("%ld: %ld %s", timestamp, philo.id, status[status_code]);
+	pthread_mutex_unlock(&philo.data->print);
+
+	if (status_code == 4)
+		// need to free and exit here; maybe with a while (1 to var) in the main ?
+		return;
+}
+
 int get_time(t_data *data)
 {
 	struct timeval now;
