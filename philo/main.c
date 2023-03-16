@@ -105,6 +105,22 @@ void	print_status(t_philo philo, int status_code)
 	// pthread_mutex_destroy();
 } */
 
+int get_time(t_data *data)
+{
+	struct timeval now;
+	long milliseconds;
+
+	gettimeofday(&now, NULL);
+	milliseconds = (now.tv_sec - data->time.tv_sec) * 1000 +
+		(now.tv_usec - data->time.tv_usec) / 1000;
+
+	printf("get_time(): now.tv_sec=%ld, data->time.tv_sec=%ld\n", now.tv_sec, data->time.tv_sec);
+	printf("get_time(): now.tv_usec=%ld, data->time.tv_usec=%ld\n", now.tv_usec, data->time.tv_usec);
+	printf("get_time(): milliseconds=%ld\n", milliseconds);
+
+	return (milliseconds);
+}
+
 void	print_status(t_philo philo, int status_code)
 {
 	char	*status[5];
@@ -123,22 +139,6 @@ void	print_status(t_philo philo, int status_code)
 	// if (status_code == 4)
 	// 	// need to free and exit here; maybe with a while (1 to var) in the main ?
 	// 	return;
-}
-
-int get_time(t_data *data)
-{
-	struct timeval now;
-	long milliseconds;
-
-	gettimeofday(&now, NULL);
-	milliseconds = (now.tv_sec - data->time.tv_sec) * 1000 +
-		(now.tv_usec - data->time.tv_usec) / 1000;
-
-	printf("get_time(): now.tv_sec=%ld, data->time.tv_sec=%ld\n", now.tv_sec, data->time.tv_sec);
-	printf("get_time(): now.tv_usec=%ld, data->time.tv_usec=%ld\n", now.tv_usec, data->time.tv_usec);
-	printf("get_time(): milliseconds=%ld\n", milliseconds);
-
-	return (milliseconds);
 }
 
 int	check_args(char **av, t_data *data)
