@@ -126,6 +126,7 @@ int get_time(t_data *data)
 
 int	main(int ac, char **av)
 {
+	struct timeval start;
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
