@@ -166,8 +166,7 @@ int	main(int ac, char **av)
 	// sleep(3);
 
 	// Get elapsed time in milliseconds
-	long milliseconds = get_time(&data);
-	printf("Elapsed time: %ld milliseconds\n", milliseconds);
+	get_time(&data);
 
 	return (0);
 }
