@@ -134,9 +134,6 @@ int	check_args(char **av, t_data *data)
 	else
 		printf("\e[33mnothing in eat count\n\e[0m");
 
-	if (!data->eat_count)
-		printf("lolipop\n");
-
 	printf("Nb philo = '%ld'\n", data->nb_philo);
 	printf("Death time = '%ld'\n", data->death_time);
 	printf("Eat time = '%ld'\n", data->eat_time);
