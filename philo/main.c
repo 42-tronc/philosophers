@@ -103,7 +103,6 @@ void	print_status(t_philo philo, int status_code)
 {
 	// need to destroy all mutexes
 	// pthread_mutex_destroy();
-	free(data);
 } */
 
 int get_time(t_data *data)
