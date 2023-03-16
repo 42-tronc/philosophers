@@ -101,6 +101,24 @@ void	print_status(t_philo philo, int status_code)
 		return;
 }
 
+/* void	*philo_routine(t_philo *philo)
+{
+	// EAT
+	pthread_mutex_lock(&mutex_here);
+	print_status(time, philo, 0);
+	pthread_mutex_lock(&mutex_here);
+	print_status(time, philo, 0);
+
+	pthread_mutex_unlock(&mutex_here);
+	pthread_mutex_unlock(&mutex_here);
+	// SLEEP
+	print_status(time, philo, 2);
+
+	// THINK
+	print_status(time, philo, 3);
+	return NULL;
+} */
+
 /* void	free_all(t_data *data)
 {
 	// need to destroy all mutexes
