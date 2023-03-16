@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: maplepy <maplepy@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/14 13:53:30 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 16:22:41 by maplepy          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,6 @@ Need to check:
 number_of_philosophers: has to be 1+
 time_to_die: has to be 1+
 */
-
-void	init_data(t_data *data)
-{
-	data->nb_philo = 0;
-	data->eat_time = 0;
-	data->sleep_time = 0;
-	data->death_time = 0;
-	data->eat_count = 0;
-}
 
 int	check_args(char **av, t_data *data)
 {
@@ -100,6 +91,7 @@ void	print_status(t_philo philo, int status_code)
 		// need to free and exit here; maybe with a while (1 to var) in the main ?
 		return;
 }
+
 
 /* void	*philo_routine(t_philo *philo)
 {
@@ -151,14 +143,13 @@ int	main(int ac, char **av)
 	if (!data)
 		return (1);
 
+	gettimeofday(&start, NULL);
+	data->time = start;
+
 	if (ac >= 5 && ac <= 6)
 	{
-		init_data(data);
 		if (check_args(av, data))
 			return (1);
-
-		gettimeofday(&start, NULL);
-		data->time = start;
 		// printf("MS: %ld\n", start.tv_usec);
 
 	}
