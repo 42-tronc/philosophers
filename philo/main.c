@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/16 16:29:29 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 17:10:03 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,51 +46,20 @@ time_to_die: has to be 1+
 */
 
 
-	if (!data->eat_count)
-		printf("lolipop\n");
 
-	printf("Nb philo = '%ld'\n", data->nb_philo);
-	printf("Death time = '%ld'\n", data->death_time);
-	printf("Eat time = '%ld'\n", data->eat_time);
-	printf("Sleep time = '%ld'\n", data->sleep_time);
-	printf("Eat count = '%ld'\n", data->eat_count);
-	// up to here
-
-	if (data->nb_philo <= 0 || data->death_time <= 0 || data->eat_time <= 0
-		|| data->sleep_time <= 0 || (av[5] && data->eat_count <= 0))
-		return (printf("\e[31mError: Arguments must be greater than 0\n"), 1);
-	return (0);
-}
-
-void	print_status(t_philo philo, int status_code)
+/* void	*philo_routine(void *arg)
 {
-	pthread_mutex_lock(&philo.data->print);
-	char	*status[5];
+	t_philo *philo;
 
-	status[0] = "has taken a fork";
-	status[1] = "is eating";
-	status[2] = "is sleeping";
-	status[3] = "is thinking";
-	status[4] = "died";
-	printf("%ld %s", philo.id, status[status_code]);
-	// printf("%ld: %ld %s", timestamp, philo.id, status[status_code]);
-	pthread_mutex_unlock(&philo.data->print);
-
-	if (status_code == 4)
-		// need to free and exit here; maybe with a while (1 to var) in the main ?
-		return;
-}
-
-/* void	*philo_routine(t_philo *philo)
-{
+	philo = (t_philo*) arg;
 	// EAT
-	pthread_mutex_lock(&mutex_here);
-	print_status(time, philo, 0);
-	pthread_mutex_lock(&mutex_here);
+	pthread_mutex_lock(&philo->fork_mutex);
+	print_status(, philo, 0);
+	pthread_mutex_lock(&philo->fork_mutex);
 	print_status(time, philo, 0);
 
-	pthread_mutex_unlock(&mutex_here);
-	pthread_mutex_unlock(&mutex_here);
+	pthread_mutex_unlock(&philo->fork_mutex);
+	pthread_mutex_unlock(&philo->fork_mutex);
 	// SLEEP
 	print_status(time, philo, 2);
 
@@ -114,7 +83,7 @@ int get_time(t_data *data)
 	milliseconds = (now.tv_sec - data->time.tv_sec) * 1000 +
 		(now.tv_usec - data->time.tv_usec) / 1000;
 
-	printf("get_time(): now.tv_sec=%ld, data->time.tv_sec=%ld\n", now.tv_sec, data->time.tv_sec);
+	printf("\nget_time(): now.tv_sec=%ld, data->time.tv_sec=%ld\n", now.tv_sec, data->time.tv_sec);
 	printf("get_time(): now.tv_usec=%ld, data->time.tv_usec=%ld\n", now.tv_usec, data->time.tv_usec);
 	printf("get_time(): milliseconds=%ld\n", milliseconds);
 
@@ -127,7 +96,7 @@ void	print_status(t_philo philo, int status_code)
 	long	elapsed_time;
 
 	pthread_mutex_lock(&philo.data->print);
-	elapsed_time = get_time(&philo.data->time);
+	elapsed_time = get_time(philo.data);
 	status[0] = "has taken a fork";
 	status[1] = "is eating";
 	status[2] = "is sleeping";
@@ -149,6 +118,7 @@ int	check_args(char **av, t_data *data)
 	data->sleep_time = ft_atoi(av[4]);
 	if (av[5])
 		data->eat_count = ft_atoi(av[5]);
+
 	// to be deleted
 	else
 		printf("\e[33mnothing in eat count\n\e[0m");
