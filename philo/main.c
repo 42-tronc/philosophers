@@ -105,6 +105,26 @@ void	print_status(t_philo philo, int status_code)
 	// pthread_mutex_destroy();
 } */
 
+void	print_status(t_philo philo, int status_code)
+{
+	char	*status[5];
+	long	elapsed_time;
+
+	pthread_mutex_lock(&philo.data->print);
+	elapsed_time = get_time(&philo.data->time);
+	status[0] = "has taken a fork";
+	status[1] = "is eating";
+	status[2] = "is sleeping";
+	status[3] = "is thinking";
+	status[4] = "died";
+	printf("%ld: %ld %s", elapsed_time, philo.id, status[status_code]);
+	pthread_mutex_unlock(&philo.data->print);
+
+	// if (status_code == 4)
+	// 	// need to free and exit here; maybe with a while (1 to var) in the main ?
+	// 	return;
+}
+
 int get_time(t_data *data)
 {
 	struct timeval now;
