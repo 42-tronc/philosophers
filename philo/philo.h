@@ -13,9 +13,12 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <pthread.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_data
 {
