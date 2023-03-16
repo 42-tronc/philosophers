@@ -118,7 +118,16 @@ int	main(int ac, char **av)
 
 	}
 	else
-		printf("Expected: philo <nb of philosophers> <time to die> \
-		<time to eat> <time to sleep> (philosophers eat count wanted)");
-	return 0;
+		printf("Expected: ./philo <nb of philosophers> <time to die> \
+		<time to eat> <time to sleep> (philosophers eat count wanted)\n");
+
+	// // Wait for 3 seconds
+	// sleep(3);
+
+	// Get elapsed time in milliseconds
+	long milliseconds = get_time(data);
+	printf("Elapsed time: %ld milliseconds\n", milliseconds);
+
+	// pas oublier de free
+	return (0);
 }
