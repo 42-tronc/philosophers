@@ -180,7 +180,6 @@ int	main(int ac, char **av)
 
 	gettimeofday(&start, NULL);
 	data.time = start;
-	// printf("MS: %ld\n", start.tv_usec);
 
 	// // Wait for 3 seconds
 	// sleep(3);
