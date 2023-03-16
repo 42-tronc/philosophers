@@ -136,11 +136,8 @@ int get_time(t_data *data)
 int	main(int ac, char **av)
 {
 	struct timeval start;
-	t_data	*data;
+	t_data	data;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
 
 	if (ac >= 5 && ac <= 6)
 	{
@@ -148,7 +145,7 @@ int	main(int ac, char **av)
 			return (1);
 
 		gettimeofday(&start, NULL);
-		data->time = start;
+		data.time = start;
 		// printf("MS: %ld\n", start.tv_usec);
 
 	}
@@ -160,9 +157,8 @@ int	main(int ac, char **av)
 	// sleep(3);
 
 	// Get elapsed time in milliseconds
-	long milliseconds = get_time(data);
+	long milliseconds = get_time(&data);
 	printf("Elapsed time: %ld milliseconds\n", milliseconds);
 
-	// pas oublier de free
 	return (0);
 }
