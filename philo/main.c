@@ -138,20 +138,16 @@ int	main(int ac, char **av)
 	struct timeval start;
 	t_data	data;
 
+	if (ac < 5 || ac > 6)
+		return (printf("Expected: ./philo <nb of philosophers> <time to die> "\
+		"<time to eat> <time to sleep> (philosophers eat count wanted)\n"), 1);
 
-	if (ac >= 5 && ac <= 6)
-	{
-		if (check_args(av, data))
-			return (1);
+	if (check_args(av, &data))
+		return (1);
 
-		gettimeofday(&start, NULL);
-		data.time = start;
-		// printf("MS: %ld\n", start.tv_usec);
-
-	}
-	else
-		printf("Expected: ./philo <nb of philosophers> <time to die> \
-		<time to eat> <time to sleep> (philosophers eat count wanted)\n");
+	gettimeofday(&start, NULL);
+	data.time = start;
+	// printf("MS: %ld\n", start.tv_usec);
 
 	// // Wait for 3 seconds
 	// sleep(3);
