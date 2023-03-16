@@ -110,7 +110,12 @@ int	main(int ac, char **av)
 	{
 		init_data(data);
 		if (check_args(av, data))
-			return 1;
+			return (1);
+
+		gettimeofday(&start, NULL);
+		data->time = start;
+		// printf("MS: %ld\n", start.tv_usec);
+
 	}
 	else
 		printf("Expected: philo <nb of philosophers> <time to die> \
