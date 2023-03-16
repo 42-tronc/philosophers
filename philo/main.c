@@ -45,17 +45,6 @@ number_of_philosophers: has to be 1+
 time_to_die: has to be 1+
 */
 
-int	check_args(char **av, t_data *data)
-{
-	data->nb_philo = ft_atoi(av[1]);
-	data->death_time = ft_atoi(av[2]);
-	data->eat_time = ft_atoi(av[3]);
-	data->sleep_time = ft_atoi(av[4]);
-	if (av[5])
-		data->eat_count = ft_atoi(av[5]);
-	// to be deleted
-	else
-		printf("\e[33mnothing in eat count\n\e[0m");
 
 	if (!data->eat_count)
 		printf("lolipop\n");
@@ -131,6 +120,34 @@ int get_time(t_data *data)
 	printf("get_time(): milliseconds=%ld\n", milliseconds);
 
 	return (milliseconds);
+}
+
+int	check_args(char **av, t_data *data)
+{
+	data->nb_philo = ft_atoi(av[1]);
+	data->death_time = ft_atoi(av[2]);
+	data->eat_time = ft_atoi(av[3]);
+	data->sleep_time = ft_atoi(av[4]);
+	if (av[5])
+		data->eat_count = ft_atoi(av[5]);
+	// to be deleted
+	else
+		printf("\e[33mnothing in eat count\n\e[0m");
+
+	if (!data->eat_count)
+		printf("lolipop\n");
+
+	printf("Nb philo = '%ld'\n", data->nb_philo);
+	printf("Death time = '%ld'\n", data->death_time);
+	printf("Eat time = '%ld'\n", data->eat_time);
+	printf("Sleep time = '%ld'\n", data->sleep_time);
+	printf("Eat count = '%ld'\n", data->eat_count);
+	// up to here
+
+	if (data->nb_philo <= 0 || data->death_time <= 0 || data->eat_time <= 0
+		|| data->sleep_time <= 0 || (av[5] && data->eat_count <= 0))
+		return (printf("\e[31mError: Arguments must be greater than 0\n"), 1);
+	return (0);
 }
 
 int	main(int ac, char **av)
