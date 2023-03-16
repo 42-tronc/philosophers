@@ -103,6 +103,9 @@ int	main(int ac, char **av)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
+	if (!data)
+		return (1);
+
 	if (ac >= 5 && ac <= 6)
 	{
 		init_data(data);
