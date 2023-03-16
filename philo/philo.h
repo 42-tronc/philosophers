@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/03/16 16:29:32 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 16:48:19 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_philo
 {
 	long			id;
 	long			eat_count;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	fork_mutex;
 	t_data			*data;
 }	t_philo;
 
