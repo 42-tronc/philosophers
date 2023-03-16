@@ -101,6 +101,13 @@ void	print_status(t_philo philo, int status_code)
 		return;
 }
 
+/* void	free_all(t_data *data)
+{
+	// need to destroy all mutexes
+	// pthread_mutex_destroy();
+	free(data);
+} */
+
 int get_time(t_data *data)
 {
 	struct timeval now;
