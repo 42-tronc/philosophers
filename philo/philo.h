@@ -22,11 +22,14 @@
 
 typedef struct s_data
 {
-	long	nb_philo;
-	long	death_time;
-	long	eat_time;
-	long	sleep_time;
-	long	eat_count;
+	long			nb_philo;
+	long			death_time;
+	long			eat_time;
+	long			sleep_time;
+	long			eat_required;
+	long			eat_count;
+	struct timeval	time;
+	pthread_mutex_t	print;
 }	t_data;
 
 int	ft_atoi(const char *str);
