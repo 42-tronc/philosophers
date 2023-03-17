@@ -68,11 +68,6 @@ time_to_die: has to be 1+
 	return NULL;
 } */
 
-/* void	free_all(t_data *data)
-{
-	// need to destroy all mutexes
-	// pthread_mutex_destroy();
-} */
 
 int get_time(t_data *data)
 {
