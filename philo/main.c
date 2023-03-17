@@ -12,6 +12,9 @@
 
 #include "philo.h"
 
+int		get_time(struct timeval time);
+void	print_status(t_philo philo, int status_code);
+
 /*
 Need to check for the args
 	number_of_philosophers
