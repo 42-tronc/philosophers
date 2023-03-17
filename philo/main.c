@@ -125,18 +125,18 @@ void	create_philos(t_data data)
 	pthread_mutex_destroy(&data.print);
 }
 
-int	get_time(t_data data)
+int	get_time(struct timeval time)
 {
 	struct timeval now;
 	long milliseconds;
 
 	gettimeofday(&now, NULL);
-	milliseconds = (now.tv_sec - data->time.tv_sec) * 1000 +
-		(now.tv_usec - data->time.tv_usec) / 1000;
+	milliseconds = (now.tv_sec - time.tv_sec) * 1000 +
+		(now.tv_usec - time.tv_usec) / 1000;
 
-	printf("\nget_time(): now.tv_sec=%ld, data->time.tv_sec=%ld\n", now.tv_sec, data->time.tv_sec);
-	printf("get_time(): now.tv_usec=%ld, data->time.tv_usec=%ld\n", now.tv_usec, data->time.tv_usec);
-	printf("get_time(): milliseconds=%ld\n", milliseconds);
+	// printf("\nget_time(): now.tv_sec=%ld, time.tv_sec=%ld\n", now.tv_sec, time.tv_sec);
+	// printf("get_time(): now.tv_usec=%ld, time.tv_usec=%ld\n", now.tv_usec, time.tv_usec);
+	// printf("get_time(): milliseconds=%ld\n", milliseconds);
 
 	return (milliseconds);
 }
