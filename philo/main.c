@@ -76,6 +76,39 @@ void	*philo_routine(void *arg)
 	return NULL;
 }
 
+void	create_philos(t_data data)
+{
+	int i;
+	// create array of philosopher structs
+	t_philo philos[data.nb_philo];
+
+	// initialize mutex for print
+	pthread_mutex_init(&data.print, NULL);
+
+	// create threads and fork mutexes for each philo
+	pthread_t threads[data.nb_philo];
+	i = 0;
+	while (i < data.nb_philo)
+	{
+		philos[i].id = i + 1;
+		philos[i].meal_eaten = 0;
+		philos[i].last_meal = data.time;
+		philos[i].data = &data;
+		pthread_mutex_init(&philos[i].fork_mutex, NULL);
+		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
+		i++;
+	}
+
+	// wait for threads to finish and destroy mutexes
+	i = 0;
+	while (i < data.nb_philo)
+	{
+		pthread_join(threads[i], NULL);
+		pthread_mutex_destroy(&philos[i].fork_mutex);
+		i++;
+	}
+	pthread_mutex_destroy(&data.print);
+}
 
 int	get_time(t_data data)
 {
