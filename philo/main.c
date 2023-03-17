@@ -189,7 +189,7 @@ int	check_args(char **av, t_data *data)
 
 int	main(int ac, char **av)
 {
-	struct timeval start;
+	struct timeval start_time;
 	t_data	data;
 
 	if (ac < 5 || ac > 6)
@@ -198,9 +198,8 @@ int	main(int ac, char **av)
 
 	if (check_args(av, &data))
 		return (1);
-
-	gettimeofday(&start, NULL);
-	data.time = start;
+	gettimeofday(&start_time, NULL);
+	create_philos(data);
 
 	// // Wait for 3 seconds
 	// sleep(3);
