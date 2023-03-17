@@ -66,10 +66,10 @@ time_to_die: has to be 1+
 	// THINK
 	print_status(time, philo, 3);
 	return NULL;
-} */
+}
 
 
-int get_time(t_data *data)
+int	get_time(t_data data)
 {
 	struct timeval now;
 	long milliseconds;
