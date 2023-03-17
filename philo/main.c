@@ -208,7 +208,7 @@ int	main(int ac, char **av)
 	// sleep(3);
 
 	// Get elapsed time in milliseconds
-	get_time(&data);
+	printf("Runtime: %dms", get_time(start_time));
 
 	return (0);
 }
