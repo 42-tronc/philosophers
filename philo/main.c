@@ -77,8 +77,18 @@ void	*philo_routine(void *arg)
 	print_status(time, philo, 2);
 
 	// THINK
-	print_status(time, philo, 3);
-	return NULL;
+	print_status(time, philo, 3); */
+
+	// printf("Philo %ld, meal eaten= %ld, last meal= %ld, start time = %ld\n", philo->id, philo->meal_eaten, philo->last_meal, philo->data->time.tv_sec);
+	printf("Philo %ld, meal eaten=%ld, last meal=%ld.%03ld, start time=%ld.%03ld\n",
+		philo->id,
+		philo->meal_eaten,
+		philo->last_meal.tv_sec,
+		philo->last_meal.tv_usec / 1000,
+		philo->data->time.tv_sec,
+		philo->data->time.tv_usec / 1000);
+
+	return (NULL);
 }
 
 void	create_philos(t_data data)
