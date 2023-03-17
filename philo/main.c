@@ -47,7 +47,15 @@ time_to_die: has to be 1+
 
 
 
-/* void	*philo_routine(void *arg)
+/**
+ * @brief Create the philosophers' routine (eat, sleep, think)
+ * It will lock each fork, eat then unlock those. Sleep for a timed duration
+ * and think for the remaining time until it can eat again.
+ *
+ * @param arg void* for each philosopher structure
+ * @return void* returns NULL but needed to use pthread_create
+ */
+void	*philo_routine(void *arg)
 {
 	t_philo *philo;
 
