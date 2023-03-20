@@ -150,7 +150,7 @@ void	print_status(t_philo philo, int status_code)
 	char	*status[5];
 	long	timestamp;
 
-	// pthread_mutex_lock(&philo.data->print);
+	pthread_mutex_lock(&philo.data->print);
 	timestamp = get_time(philo.data->time);
 	status[0] = "is thinking";
 	status[1] = "has taken a fork";
@@ -158,7 +158,7 @@ void	print_status(t_philo philo, int status_code)
 	status[3] = "is sleeping";
 	status[4] = "died";
 	printf("%ld: %ld %s\n", timestamp, philo.id, status[status_code]);
-	// pthread_mutex_unlock(&philo.data->print);
+	pthread_mutex_unlock(&philo.data->print);
 
 	// if (status_code == 4)
 	// 	// need to free and exit here; maybe with a while (1 to var) in the main ?
