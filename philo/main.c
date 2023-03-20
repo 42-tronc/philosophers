@@ -62,7 +62,12 @@ void	*philo_routine(void *arg)
 		sleep(2); // a mettre en usleep a terme
 
 	// pthread_mutex_lock(&philo->fork_mutex);
-	print_status(*philo, 0);
+	// print_status(*philo, 0);
+
+	// SLEEP
+	print_status(*philo, 3);
+	usleep(philo->data->sleep_time * 1000);
+
 /*
 	// EAT
 	pthread_mutex_lock(&philo->fork_mutex);
