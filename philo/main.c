@@ -161,6 +161,13 @@ void	print_status(t_philo philo, int status_code)
 	// 	return;
 }
 
+/**
+ * @brief checks if args passed are correct (unsigned int > 0)
+ *
+ * @param av array of args (typically argv)
+ * @param data struct t_data to add each arg to
+ * @return int 1 if error, 0 if all checks passed
+ */
 int	check_args(char **av, t_data *data)
 {
 	data->nb_philo = ft_atoi(av[1]);
