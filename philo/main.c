@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/20 16:22:01 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/20 16:32:07 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,6 @@ void	*philo_routine(void *arg)
 	print_status(*philo, 3);
 	usleep(philo->data->sleep_time * 1000);
 
-/*
-	// EAT
-	pthread_mutex_lock(&philo->fork_mutex);
-	print_status(, philo, 0);
-	pthread_mutex_lock(&philo->fork_mutex);
-	print_status(time, philo, 0);
-
-	pthread_mutex_unlock(&philo->fork_mutex);
-	pthread_mutex_unlock(&philo->fork_mutex);
-	// SLEEP
-	print_status(time, philo, 2);
-
-	// THINK
-*/
-	// print_status(*philo, 3);
 	// printf("Philo %ld, meal eaten=%ld, last meal=%ld.%03ld, start time=%ld.%03ld\n",
 	// 	philo->id,
 	// 	philo->meal_eaten,
@@ -92,7 +77,6 @@ void	*philo_routine(void *arg)
 	// 	philo->last_meal.tv_usec / 1000,
 	// 	philo->data->time.tv_sec,
 	// 	philo->data->time.tv_usec / 1000);
-
 	return (NULL);
 }
 
@@ -100,7 +84,7 @@ void	create_philos(t_data data)
 {
 	int				i;
 	t_philo			philos[data.nb_philo];
-	pthread_mutex_t	fork_mutex[data.nb_philo];
+	// pthread_mutex_t	fork_mutex[data.nb_philo];
 
 	// initialize mutex for print
 	pthread_mutex_init(&data.print, NULL);
