@@ -135,6 +135,12 @@ int	get_time(struct timeval time)
 	return (milliseconds);
 }
 
+/**
+ * @brief  printf status with timestamp since simu start, philo's id and action
+ *
+ * @param philo takes a t_philo struct to get the id of philo
+ * @param status_code action that will be displayed like thinking, eating etc.
+ */
 void	print_status(t_philo philo, int status_code)
 {
 	char	*status[5];
