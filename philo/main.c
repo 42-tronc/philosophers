@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/20 16:21:40 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/20 16:22:01 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@ Allowed functions:
 	pthread_create, pthread_detach, pthread_join, pthread_mutex_init,
 	pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
 */
-
-/*
-Need to check:
-
-number_of_philosophers: has to be 1+
-time_to_die: has to be 1+
-*/
-
-
 
 /**
  * @brief Create the philosophers' routine (eat, sleep, think)
