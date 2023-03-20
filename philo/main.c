@@ -54,6 +54,10 @@ void	*philo_routine(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo*) arg;
+	// THINK
+	print_status(*philo, 3);
+
+	// EAT
 	if (philo->id % 2 == 0)
 		sleep(2); // a mettre en usleep a terme
 
