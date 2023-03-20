@@ -42,7 +42,7 @@ Allowed functions:
 */
 
 /**
- * @brief Create the philosophers' routine (eat, sleep, think)
+ * @brief Create the philosophers' routine (think, eat, sleep)
  * It will lock each fork, eat then unlock those. Sleep for a timed duration
  * and think for the remaining time until it can eat again.
  *
