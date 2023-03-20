@@ -80,6 +80,11 @@ void	*philo_routine(void *arg)
 	return (NULL);
 }
 
+/**
+ * @brief create each philo, init its vars, mutexes and start the simulation
+ *
+ * @param data t_data struct, to pass it to each philo
+ */
 void	create_philos(t_data data)
 {
 	int				i;
