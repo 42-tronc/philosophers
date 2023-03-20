@@ -61,10 +61,28 @@ void	*philo_routine(void *arg)
 	if (philo->id % 2 == 0)
 		sleep(2); // a mettre en usleep a terme
 
-	// pthread_mutex_lock(&philo->fork_mutex);
+	// printf("Philo id '%ld' will lock mutex %ld and %ld\n", philo->id, philo->id - 1, (philo->id) % philo->data->nb_philo);
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id - 1]);
+	print_status(*philo, 1);
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
+	print_status(*philo, 1);
+
 	print_status(*philo, 2);
 	usleep(philo->data->eat_time * 1000);
 	philo->meal_eaten++;
+	philo->last_meal = get_time(philo->data->time); // takes timestamp since start N ms
+	// printf("Last meal of %ld: %ld\n", philo->id, philo->last_meal);
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
+
+/*	Exemple de mutex
+	pthread_mutex_lock(&philo->data->fork_mutexes[0]);
+	printf("\nLocking mutex %d \n", 0);
+	printf("Bonjour ici philo %ld\n", philo->id);
+	// sleep(2);
+	printf("Unlocking mutex %d \n", 0);
+	pthread_mutex_unlock(&philo->data->fork_mutexes[0]);
+*/
 
 	// SLEEP
 	print_status(*philo, 3);
