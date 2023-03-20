@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int		get_time(struct timeval time);
+long	get_time(struct timeval time);
 void	print_status(t_philo philo, int status_code);
 
 /*
@@ -118,9 +118,9 @@ void	create_philos(t_data data)
  * @brief Get the time between now and arg passed as time
  *
  * @param time struct timeval where (now - time) will be calculated
- * @return int milliseconds from now since time passed
+ * @return long milliseconds from now since time passed
  */
-int	get_time(struct timeval time)
+long	get_time(struct timeval time)
 {
 	struct timeval now;
 	long milliseconds;
