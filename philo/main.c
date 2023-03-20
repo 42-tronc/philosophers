@@ -137,8 +137,8 @@ int	get_time(struct timeval time)
 	milliseconds = (now.tv_sec - time.tv_sec) * 1000 +
 		(now.tv_usec - time.tv_usec) / 1000;
 
-	// printf("\nget_time(): now.tv_sec=%ld, time.tv_sec=%ld\n", now.tv_sec, time.tv_sec);
-	// printf("get_time(): now.tv_usec=%ld, time.tv_usec=%ld\n", now.tv_usec, time.tv_usec);
+	// printf("\nget_time(): rnow.tv_sec=%ld, rnow.tv_usec=%ld\n", now.tv_sec, now.tv_usec);
+	// printf("get_time(): time.tv_sec=%ld, time.tv_usec=%ld\n", time.tv_sec, time.tv_usec);
 	// printf("get_time(): milliseconds=%ld\n", milliseconds);
 
 	return (milliseconds);
@@ -192,7 +192,7 @@ int	check_args(char **av, t_data *data)
 
 int	main(int ac, char **av)
 {
-	struct timeval start_time;
+	// struct timeval start_time;
 	t_data	data;
 
 	if (ac < 5 || ac > 6)
@@ -201,14 +201,15 @@ int	main(int ac, char **av)
 
 	if (check_args(av, &data))
 		return (1);
-	gettimeofday(&start_time, NULL);
+	gettimeofday(&data.time, NULL);
+
 	create_philos(data);
 
 	// // Wait for 3 seconds
 	// sleep(3);
 
 	// Get elapsed time in milliseconds
-	printf("Runtime: %dms", get_time(start_time));
+	printf("Runtime: %dms", get_time(data.time));
 
 	return (0);
 }
