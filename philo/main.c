@@ -114,6 +114,12 @@ void	create_philos(t_data data)
 	pthread_mutex_destroy(&data.print);
 }
 
+/**
+ * @brief Get the time between now and arg passed as time
+ *
+ * @param time struct timeval where (now - time) will be calculated
+ * @return int milliseconds from now since time passed
+ */
 int	get_time(struct timeval time)
 {
 	struct timeval now;
