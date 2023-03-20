@@ -104,9 +104,15 @@ void	create_philos(t_data data)
 {
 	int				i;
 	t_philo			philos[data.nb_philo];
-	// pthread_mutex_t	fork_mutex[data.nb_philo];
+	pthread_mutex_t	fork_mutex[data.nb_philo];
 
-	// initialize mutex for print
+	// initialize fork mutexes
+	i = 0;
+	while (i < data.nb_philo)
+		pthread_mutex_init(&fork_mutex[i++], NULL);
+	data.fork_mutexes = fork_mutex;
+
+	// initialize print mutex
 	pthread_mutex_init(&data.print, NULL);
 
 	// create threads and fork mutexes for each philo
