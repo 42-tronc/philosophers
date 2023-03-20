@@ -66,7 +66,8 @@ void	*philo_routine(void *arg)
 	if (philo->id % 2 == 0)
 		sleep(2); // a mettre en usleep a terme
 
-	// print_status(*philo, 0);
+	// pthread_mutex_lock(&philo->fork_mutex);
+	print_status(*philo, 0);
 /*
 	// EAT
 	pthread_mutex_lock(&philo->fork_mutex);
