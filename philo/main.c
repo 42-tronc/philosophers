@@ -55,7 +55,7 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo*) arg;
 	// THINK
-	print_status(*philo, 3);
+	print_status(*philo, 0);
 
 	// EAT
 	if (philo->id % 2 == 0)
@@ -145,10 +145,10 @@ void	print_status(t_philo philo, int status_code)
 
 	// pthread_mutex_lock(&philo.data->print);
 	timestamp = get_time(philo.data->time);
-	status[0] = "has taken a fork";
-	status[1] = "is eating";
-	status[2] = "is sleeping";
-	status[3] = "is thinking";
+	status[0] = "is thinking";
+	status[1] = "has taken a fork";
+	status[2] = "is eating";
+	status[3] = "is sleeping";
 	status[4] = "died";
 	printf("%ld: %ld %s\n", timestamp, philo.id, status[status_code]);
 	// pthread_mutex_unlock(&philo.data->print);
