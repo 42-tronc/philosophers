@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/20 16:19:52 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/20 16:21:40 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	*philo_routine(void *arg)
 	// THINK
 */
 	// print_status(*philo, 3);
-	// printf("Philo %ld, meal eaten= %ld, last meal= %ld, start time = %ld\n", philo->id, philo->meal_eaten, philo->last_meal, philo->data->time.tv_sec);
 	// printf("Philo %ld, meal eaten=%ld, last meal=%ld.%03ld, start time=%ld.%03ld\n",
 	// 	philo->id,
 	// 	philo->meal_eaten,
@@ -202,11 +201,7 @@ int	main(int ac, char **av)
 	if (check_args(av, &data))
 		return (1);
 	gettimeofday(&data.time, NULL);
-
 	create_philos(data);
-
-	// // Wait for 3 seconds
-	// sleep(3);
 
 	// Get elapsed time in milliseconds
 	printf("Runtime: %dms", get_time(data.time));
