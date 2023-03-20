@@ -122,7 +122,7 @@ void	create_philos(t_data data)
 	{
 		philos[i].id = i + 1;
 		philos[i].meal_eaten = 0;
-		philos[i].last_meal = data.time;
+		philos[i].last_meal = 0;
 		philos[i].data = &data;
 		pthread_mutex_init(&philos[i].fork_mutex, NULL);
 		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
@@ -235,7 +235,7 @@ int	main(int ac, char **av)
 	create_philos(data);
 
 	// Get elapsed time in milliseconds
-	printf("Runtime: %dms", get_time(data.time));
+	printf("Runtime: %ldms", get_time(data.time));
 
 	return (0);
 }

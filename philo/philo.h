@@ -36,7 +36,7 @@ typedef struct s_philo
 {
 	long			id;
 	long			meal_eaten;
-	struct timeval	last_meal;
+	long			last_meal;
 	pthread_mutex_t	fork_mutex;
 	t_data			*data;
 }	t_philo;
