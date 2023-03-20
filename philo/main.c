@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/17 14:47:01 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/20 16:19:52 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,25 @@ void	*philo_routine(void *arg)
 	print_status(time, philo, 2);
 
 	// THINK
-	print_status(time, philo, 3); */
-
+*/
+	// print_status(*philo, 3);
 	// printf("Philo %ld, meal eaten= %ld, last meal= %ld, start time = %ld\n", philo->id, philo->meal_eaten, philo->last_meal, philo->data->time.tv_sec);
-	printf("Philo %ld, meal eaten=%ld, last meal=%ld.%03ld, start time=%ld.%03ld\n",
-		philo->id,
-		philo->meal_eaten,
-		philo->last_meal.tv_sec,
-		philo->last_meal.tv_usec / 1000,
-		philo->data->time.tv_sec,
-		philo->data->time.tv_usec / 1000);
+	// printf("Philo %ld, meal eaten=%ld, last meal=%ld.%03ld, start time=%ld.%03ld\n",
+	// 	philo->id,
+	// 	philo->meal_eaten,
+	// 	philo->last_meal.tv_sec,
+	// 	philo->last_meal.tv_usec / 1000,
+	// 	philo->data->time.tv_sec,
+	// 	philo->data->time.tv_usec / 1000);
 
 	return (NULL);
 }
 
 void	create_philos(t_data data)
 {
-	int i;
-	// create array of philosopher structs
-	t_philo philos[data.nb_philo];
+	int				i;
+	t_philo			philos[data.nb_philo];
+	pthread_mutex_t	fork_mutex[data.nb_philo];
 
 	// initialize mutex for print
 	pthread_mutex_init(&data.print, NULL);
@@ -141,7 +141,6 @@ int	get_time(struct timeval time)
 	// printf("\nget_time(): rnow.tv_sec=%ld, rnow.tv_usec=%ld\n", now.tv_sec, now.tv_usec);
 	// printf("get_time(): time.tv_sec=%ld, time.tv_usec=%ld\n", time.tv_sec, time.tv_usec);
 	// printf("get_time(): milliseconds=%ld\n", milliseconds);
-
 	return (milliseconds);
 }
 
