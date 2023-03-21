@@ -26,8 +26,7 @@ typedef struct s_data
 	long			death_time;
 	long			eat_time;
 	long			sleep_time;
-	long			eat_required;
-	long			eat_count;
+	long			meal_limit;
 	struct timeval	time;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*fork_mutexes;
