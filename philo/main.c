@@ -71,7 +71,7 @@ void	*philo_routine(void *arg)
 
 	print_status(*philo, 2);
 	usleep(philo->data->eat_time * 1000);
-	philo->meal_eaten++;
+	philo->eaten++;
 	philo->last_meal = get_time(philo->data->time); // takes timestamp since start N ms
 	// printf("Last meal of %ld: %ld\n", philo->id, philo->last_meal);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
@@ -83,7 +83,7 @@ void	*philo_routine(void *arg)
 
 	printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
 		philo->id,
-		philo->meal_eaten,
+		philo->eaten,
 		philo->last_meal);
 
 	}
@@ -117,7 +117,7 @@ void	create_philos(t_data data)
 	while (i < data.nb_philo)
 	{
 		philos[i].id = i + 1;
-		philos[i].meal_eaten = 0;
+		philos[i].eaten = 0;
 		philos[i].last_meal = 0;
 		philos[i].data = &data;
 		// pthread_mutex_init(&philos[i].fork_mutex, NULL);
