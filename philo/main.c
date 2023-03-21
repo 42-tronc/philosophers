@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/21 13:41:45 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/21 14:52:38 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void	*philo_routine(void *arg)
 		philo->eaten,
 		philo->last_meal);
 
+	// ate enough
+	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
+		return (printf("%ld am full\n", philo->id), NULL);
 	}
 
 	return (NULL);
