@@ -61,7 +61,7 @@ void	*philo_routine(void *arg)
 
 	// EAT
 	if (philo->id % 2 == 0)
-		usleep(20); // a mettre en usleep a terme
+		usleep(30); // a mettre en usleep a terme
 
 	// printf("Philo id '%ld' will lock mutex %ld and %ld\n", philo->id, philo->id - 1, (philo->id) % philo->data->nb_philo);
 	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id - 1]);
