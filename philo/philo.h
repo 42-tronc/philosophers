@@ -22,6 +22,7 @@
 
 typedef struct s_data
 {
+	int				all_alive;
 	long			nb_philo;
 	long			death_time;
 	long			eat_time;
@@ -30,7 +31,6 @@ typedef struct s_data
 	struct timeval	time;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*fork_mutexes;
-	int				all_alive;
 }	t_data;
 
 typedef struct s_philo

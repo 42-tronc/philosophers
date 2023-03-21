@@ -54,6 +54,8 @@ void	*philo_routine(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo*) arg;
+	while (philo->data->all_alive)
+	{
 	// THINK
 	print_status(*philo, 0);
 
@@ -83,6 +85,9 @@ void	*philo_routine(void *arg)
 		philo->id,
 		philo->meal_eaten,
 		philo->last_meal);
+
+	}
+
 	return (NULL);
 }
 
@@ -188,11 +193,11 @@ void	print_status(t_philo philo, int status_code)
  */
 int	check_args(char **av, t_data *data)
 {
+	data->all_alive = 1;
 	data->nb_philo = ft_atoi(av[1]);
 	data->death_time = ft_atoi(av[2]);
 	data->eat_time = ft_atoi(av[3]);
 	data->sleep_time = ft_atoi(av[4]);
-	data->all_alive = 1;
 	if (av[5])
 		data->meal_limit = ft_atoi(av[5]);
 
