@@ -124,7 +124,7 @@ void	create_philos(t_data data)
 		philos[i].meal_eaten = 0;
 		philos[i].last_meal = 0;
 		philos[i].data = &data;
-		pthread_mutex_init(&philos[i].fork_mutex, NULL);
+		// pthread_mutex_init(&philos[i].fork_mutex, NULL);
 		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
 		i++;
 	}
@@ -134,7 +134,8 @@ void	create_philos(t_data data)
 	while (i < data.nb_philo)
 	{
 		pthread_join(threads[i], NULL);
-		pthread_mutex_destroy(&philos[i].fork_mutex);
+		pthread_mutex_destroy(&data.fork_mutexes[i]);
+		// pthread_mutex_destroy(&philos[i].fork_mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&data.print);
