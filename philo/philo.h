@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/03/17 12:35:12 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/20 18:39:29 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data
 	long			eat_count;
 	struct timeval	time;
 	pthread_mutex_t	print;
+	pthread_mutex_t	*fork_mutexes;
 }	t_data;
 
 typedef struct s_philo
@@ -37,7 +38,7 @@ typedef struct s_philo
 	long			id;
 	long			meal_eaten;
 	long			last_meal;
-	pthread_mutex_t	fork_mutex;
+	// pthread_mutex_t	fork_mutex;
 	t_data			*data;
 }	t_philo;
 
