@@ -234,7 +234,7 @@ int	main(int ac, char **av)
 	create_philos(data);
 
 	// Get elapsed time in milliseconds
-	printf("Runtime: %ldms", get_time(data.time));
+	printf("Runtime: %ldms\n\n", get_time(data.time));
 
 	return (0);
 }
