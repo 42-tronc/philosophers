@@ -206,7 +206,8 @@ int	check_args(char **av, t_data *data)
 
 	// to be deleted
 	else
-		printf("\e[33mnothing in eat count\n\e[0m");
+		data->eat_count = 0;
+		// printf("\e[33mnothing in eat count\n\e[0m");
 
 	printf("Nb philo = '%ld'\n", data->nb_philo);
 	printf("Death time = '%ld'\n", data->death_time);
