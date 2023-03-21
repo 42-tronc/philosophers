@@ -192,6 +192,7 @@ int	check_args(char **av, t_data *data)
 	data->death_time = ft_atoi(av[2]);
 	data->eat_time = ft_atoi(av[3]);
 	data->sleep_time = ft_atoi(av[4]);
+	data->all_alive = 1;
 	if (av[5])
 		data->eat_count = ft_atoi(av[5]);
 
