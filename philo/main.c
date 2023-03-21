@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/20 18:36:59 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/21 13:41:28 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ Need to check for the args
 Allowed functions:
 	memset, printf, malloc, free, write,
 	usleep, gettimeofday,
-	pthread_create, pthread_detach, pthread_join, pthread_mutex_init,
-	pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
+	pthread_create, pthread_detach, pthread_join,
+	pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
 */
 
 /**
@@ -74,15 +74,6 @@ void	*philo_routine(void *arg)
 	// printf("Last meal of %ld: %ld\n", philo->id, philo->last_meal);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
-
-/*	Exemple de mutex
-	pthread_mutex_lock(&philo->data->fork_mutexes[0]);
-	printf("\nLocking mutex %d \n", 0);
-	printf("Bonjour ici philo %ld\n", philo->id);
-	// sleep(2);
-	printf("Unlocking mutex %d \n", 0);
-	pthread_mutex_unlock(&philo->data->fork_mutexes[0]);
-*/
 
 	// SLEEP
 	print_status(*philo, 3);
