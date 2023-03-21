@@ -180,7 +180,7 @@ void	print_status(t_philo philo, int status_code)
 	status[2] = "is eating";
 	status[3] = "is sleeping";
 	status[4] = "died";
-	printf("%ld: %ld %s\n", timestamp, philo.id, status[status_code]);
+	printf("%ldms: philo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print);
 
 	// if (status_code == 4)
