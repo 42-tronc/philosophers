@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/20 16:32:07 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/20 18:36:59 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*philo_routine(void *arg)
 
 	// EAT
 	if (philo->id % 2 == 0)
-		sleep(2); // a mettre en usleep a terme
+		usleep(20); // a mettre en usleep a terme
 
 	// printf("Philo id '%ld' will lock mutex %ld and %ld\n", philo->id, philo->id - 1, (philo->id) % philo->data->nb_philo);
 	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id - 1]);
