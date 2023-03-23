@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/03/21 14:43:00 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 16:55:00 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ typedef struct s_data
 {
 	int				all_alive;
 	long			nb_philo;
-	long			death_time;
-	long			eat_time;
-	long			sleep_time;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
 	long			meal_limit;
-	struct timeval	time;
+	struct timeval	start_time;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*fork_mutexes;
 }	t_data;

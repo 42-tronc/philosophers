@@ -70,7 +70,7 @@ void	*philo_routine(void *arg)
 	print_status(*philo, 1);
 
 	print_status(*philo, 2);
-	usleep(philo->data->eat_time * 1000);
+	usleep(philo->data->time_to_eat * 1000);
 	philo->eaten++;
 	philo->last_meal = get_time(philo->data->time); // takes timestamp since start N ms
 	// printf("Last meal of %ld: %ld\n", philo->id, philo->last_meal);
@@ -200,7 +200,7 @@ void	print_status(t_philo philo, int status_code)
 	long	timestamp;
 
 	pthread_mutex_lock(&philo.data->print);
-	timestamp = get_time(philo.data->time);
+	timestamp = get_time(philo.data->start_time);
 	status[0] = "is thinking";
 	status[1] = "has taken a fork";
 	status[2] = "is eating";
@@ -225,9 +225,9 @@ int	check_args(char **av, t_data *data)
 {
 	data->all_alive = 1;
 	data->nb_philo = ft_atoi(av[1]);
-	data->death_time = ft_atoi(av[2]);
-	data->eat_time = ft_atoi(av[3]);
-	data->sleep_time = ft_atoi(av[4]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
 	if (av[5])
 		data->meal_limit = ft_atoi(av[5]);
 
@@ -237,14 +237,14 @@ int	check_args(char **av, t_data *data)
 		// printf("\e[33mnothing in eat count\n\e[0m");
 
 	printf("Nb philo = '%ld'\n", data->nb_philo);
-	printf("Death time = '%ld'\n", data->death_time);
-	printf("Eat time = '%ld'\n", data->eat_time);
-	printf("Sleep time = '%ld'\n", data->sleep_time);
+	printf("Death time = '%ld'\n", data->time_to_die);
+	printf("Eat time = '%ld'\n", data->time_to_eat);
+	printf("Sleep time = '%ld'\n", data->time_to_sleep);
 	printf("Meal limit = '%ld'\n", data->meal_limit);
 	// up to here
 
-	if (data->nb_philo <= 0 || data->death_time <= 0 || data->eat_time <= 0
-		|| data->sleep_time <= 0 || (av[5] && data->meal_limit <= 0))
+	if (data->nb_philo <= 0 || data->time_to_die <= 0 || data->time_to_eat <= 0
+		|| data->time_to_sleep <= 0 || (av[5] && data->meal_limit <= 0))
 		return (printf("\e[31mError: Arguments must be greater than 0\n"), 1);
 	return (0);
 }
@@ -260,11 +260,11 @@ int	main(int ac, char **av)
 
 	if (check_args(av, &data))
 		return (1);
-	gettimeofday(&data.time, NULL);
+	gettimeofday(&data.start_time, NULL);
 	create_philos(data);
 
 	// Get elapsed time in milliseconds
-	printf("Runtime: %ldms\n\n", get_time(data.time));
+	printf("Runtime: %ldms\n\n", get_time(data.start_time));
 
 	return (0);
 }
