@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/23 17:00:59 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 18:33:24 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ void	*philo_routine(void *arg)
 	print_status(*philo, 1);
 
 	print_status(*philo, 2);
+	gettimeofday(&philo->last_meal, NULL);
 	usleep(philo->data->time_to_eat * 1000);
 	philo->eaten++;
-	philo->last_meal = get_time(philo->data->time); // takes timestamp since start N ms
-	// printf("Last meal of %ld: %ld\n", philo->id, philo->last_meal);
+	// either take from start of prog: Xms
+	// or take from last meal and
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
 
