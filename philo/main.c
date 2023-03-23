@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/23 23:59:52 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/24 00:04:35 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*philo_routine(void *arg)
 	print_status(*philo, 1);
 
 	print_status(*philo, 2);
-	gettimeofday(&philo->last_meal, NULL);
+	gettimeofday(&philo->last_meal, NULL); // maybe move this at the end of the meal ?
 	usleep(philo->data->time_to_eat * 1000);
 	philo->eaten++;
 	// either take from start of prog: Xms
@@ -61,6 +61,7 @@ void	*philo_routine(void *arg)
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
 
+	// maybe stop here in case someone dies?
 	// SLEEP
 	print_status(*philo, 3);
 	usleep(philo->data->time_to_sleep * 1000);
