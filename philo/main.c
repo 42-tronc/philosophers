@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/23 23:53:35 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 23:58:08 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ void	*philo_routine(void *arg)
  * @param philos t_philo array to check for each philo death
  * @return int 1 if it needs to check again (so no one died yet), 0 if one dies
  */
-int	check_death(t_data data, t_philo *philos)
+int	check_death(t_data *data, t_philo *philos)
 {
 	int		id;
 	long	since_meal;
 
-	while (data.all_alive)
+	while (data->all_alive)
 	{
 		id = 0;
-		while(id <= data.nb_philo)
+		while(id < data->nb_philo)
 		{
 			since_meal = get_time(philos[id].last_meal);
 			if (since_meal > data->time_to_die)
@@ -145,6 +145,7 @@ void	create_philos(t_data *data)
 		i++;
 	}
 
+	check_death(data, philos);
 	// wait for threads to finish and destroy mutexes
 	i = 0;
 	while (i < data->nb_philo)
