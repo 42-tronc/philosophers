@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/23 23:58:08 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 23:59:52 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	check_death(t_data *data, t_philo *philos)
 		id = 0;
 		while(id < data->nb_philo)
 		{
+			if (data->need_to_eat == 0)
+				return (0);
 			since_meal = get_time(philos[id].last_meal);
 			if (since_meal > data->time_to_die)
 			{
@@ -196,6 +198,9 @@ void	print_status(t_philo philo, int status_code)
 	status[2] = "is eating";
 	status[3] = "is sleeping";
 	status[4] = "died";
+	(void) status;
+	(void) status_code;
+	(void) timestamp;
 	printf("%ldms: philo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print);
 }
