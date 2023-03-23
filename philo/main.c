@@ -88,7 +88,8 @@ void	*philo_routine(void *arg)
 
 	// ate enough
 	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
-		return (printf("%ld am full\n", philo->id), NULL);
+		return (NULL);
+		// return (printf("%ld am full\n", philo->id), NULL);
 	}
 
 	return (NULL);
