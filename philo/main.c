@@ -57,6 +57,7 @@ void	*philo_routine(void *arg)
 	philo->eaten++;
 	// either take from start of prog: Xms
 	// or take from last meal and
+	// philo->last_meal = get_time(philo->data->time); // takes timestamp since start N ms
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
 
