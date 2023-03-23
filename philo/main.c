@@ -65,10 +65,11 @@ void	*philo_routine(void *arg)
 	print_status(*philo, 3);
 	usleep(philo->data->time_to_sleep * 1000);
 
-	printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
-		philo->id,
-		philo->eaten,
-		philo->last_meal);
+	// Debug
+	// printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
+	// 	philo->id,
+	// 	philo->eaten,
+	// 	get_time(philo->last_meal));
 
 	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
 		return (philo->data->need_to_eat--, NULL);
