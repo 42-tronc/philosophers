@@ -131,6 +131,8 @@ void	create_philos(t_data *data)
 	{
 		philos[i].id = i + 1;
 		philos[i].eaten = 0;
+		// philos[i].last_meal = 0;
+		gettimeofday(&philos[i].last_meal, NULL);
 		// philos[i].data = &data;
 		philos[i].data = data; // Pass a pointer to the t_data structure
 		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
