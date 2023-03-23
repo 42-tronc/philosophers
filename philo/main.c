@@ -95,6 +95,33 @@ void	*philo_routine(void *arg)
 }
 
 /**
+ * @brief checks if a philo has died
+ *
+ * @param data t_data struct to get nb of philo
+ * @param philos t_philo array to check for each philo death
+ * @return int 1 if it needs to check again (so no one died yet), 0 if one dies
+ */
+int	check_death(t_data data, t_philo *philos)
+{
+	int id;
+
+	while (data.all_alive)
+	{
+		id = 0;
+		while(id <= data.nb_philo)
+		{
+			if (philos[id].last_meal > data.time_to_die)
+			{
+				data.all_alive = 0;
+				return (1);
+			}
+		}
+		usleep(1000); // maybe put less than 1ms or calculate ideal time
+	}
+	return (0);
+}
+
+/**
  * @brief create each philo, init its vars, mutexes and start the simulation
  *
  * @param data t_data struct, to pass it to each philo
