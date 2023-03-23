@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/23 18:33:24 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 23:53:35 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,43 +109,43 @@ int	check_death(t_data data, t_philo *philos)
  *
  * @param data t_data struct, to pass it to each philo
  */
-void	create_philos(t_data data)
+void	create_philos(t_data *data)
 {
 	int				i;
-	t_philo			philos[data.nb_philo];
-	pthread_mutex_t	fork_mutex[data.nb_philo];
+	t_philo			philos[data->nb_philo];
+	pthread_mutex_t	fork_mutex[data->nb_philo];
 
 	// initialize fork mutexes
 	i = 0;
-	while (i < data.nb_philo)
+	while (i < data->nb_philo)
 		pthread_mutex_init(&fork_mutex[i++], NULL);
-	data.fork_mutexes = fork_mutex;
+	data->fork_mutexes = fork_mutex;
 
 	// initialize print mutex
-	pthread_mutex_init(&data.print, NULL);
+	pthread_mutex_init(&data->print, NULL);
 
 	// create threads and fork mutexes for each philo
-	pthread_t threads[data.nb_philo];
+	pthread_t threads[data->nb_philo];
 	i = 0;
-	while (i < data.nb_philo)
+	while (i < data->nb_philo)
 	{
 		philos[i].id = i + 1;
 		philos[i].eaten = 0;
-		philos[i].last_meal = 0;
-		philos[i].data = &data;
+		// philos[i].data = &data;
+		philos[i].data = data; // Pass a pointer to the t_data structure
 		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
 		i++;
 	}
 
 	// wait for threads to finish and destroy mutexes
 	i = 0;
-	while (i < data.nb_philo)
+	while (i < data->nb_philo)
 	{
 		pthread_join(threads[i], NULL);
-		pthread_mutex_destroy(&data.fork_mutexes[i]);
+		pthread_mutex_destroy(&data->fork_mutexes[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&data.print);
+	pthread_mutex_destroy(&data->print);
 }
 
 /**
@@ -235,7 +235,7 @@ int	main(int ac, char **av)
 	if (check_args(av, &data))
 		return (1);
 	gettimeofday(&data.start_time, NULL);
-	create_philos(data);
+	create_philos(&data);
 
 	// Get elapsed time in milliseconds
 	printf("Runtime: %ldms\n\n", get_time(data.start_time));
