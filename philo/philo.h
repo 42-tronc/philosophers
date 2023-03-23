@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/03/23 16:55:00 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 18:24:10 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_data
 {
 	int				all_alive;
+	int				need_to_eat;
 	long			nb_philo;
 	long			time_to_die;
 	long			time_to_eat;

@@ -71,8 +71,8 @@ void	*philo_routine(void *arg)
 		philo->last_meal);
 
 	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
-		return (NULL);
-		// return (printf("%ld am full\n", philo->id), NULL);
+		return (philo->data->need_to_eat--, NULL);
+		// return (printf("%ld am full\n", philo->id), philo->data->need_to_eat--, NULL);
 	}
 	return (NULL);
 }
@@ -204,6 +204,7 @@ int	check_args(char **av, t_data *data)
 {
 	data->all_alive = 1;
 	data->nb_philo = ft_atoi(av[1]);
+	data->need_to_eat = data->nb_philo;
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
