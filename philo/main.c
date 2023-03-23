@@ -63,7 +63,7 @@ void	*philo_routine(void *arg)
 
 	// SLEEP
 	print_status(*philo, 3);
-	usleep(philo->data->sleep_time * 1000);
+	usleep(philo->data->time_to_sleep * 1000);
 
 	printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
 		philo->id,
