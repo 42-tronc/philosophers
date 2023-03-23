@@ -91,7 +91,6 @@ void	*philo_routine(void *arg)
 		return (NULL);
 		// return (printf("%ld am full\n", philo->id), NULL);
 	}
-
 	return (NULL);
 }
 
