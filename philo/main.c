@@ -87,18 +87,23 @@ void	*philo_routine(void *arg)
  */
 int	check_death(t_data data, t_philo *philos)
 {
-	int id;
+	int		id;
+	long	since_meal;
 
 	while (data.all_alive)
 	{
 		id = 0;
 		while(id <= data.nb_philo)
 		{
-			if (philos[id].last_meal > data.time_to_die)
+			since_meal = get_time(philos[id].last_meal);
+			if (since_meal > data->time_to_die)
 			{
-				data.all_alive = 0;
+				printf("%d be dead, he waited %ldms\n", id + 1, since_meal);
+				print_status(philos[id], 4);
+				data->all_alive = 0;
 				return (1);
 			}
+			id++;
 		}
 		usleep(1000); // maybe put less than 1ms or calculate ideal time
 	}
