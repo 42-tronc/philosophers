@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/21 14:52:38 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 17:00:59 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,6 @@ long	get_time(struct timeval time);
 void	print_status(t_philo philo, int status_code);
 
 /*
-Need to check for the args
-	number_of_philosophers
-	time_to_die
-	time_to_eat
-	time_to_sleep
-	number_of_times_each_philosopher_must_eat
-
-	- number_of_philosophers: The number of philosophers and also the number of forks.
-	- time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die
-	milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
-	- time_to_eat (in milliseconds): The time it takes for a philosopher to eat.
-	During that time, they will need to hold two forks.
-	- time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
-	- number_of_times_each_philosopher_must_eat (optional argument): If all
-	philosophers have eaten at least number_of_times_each_philosopher_must_eat
-	times, the simulation stops. If not specified, the simulation stops when a
-	philosopher dies.
-
 Allowed functions:
 	memset, printf, malloc, free, write,
 	usleep, gettimeofday,
@@ -86,7 +68,6 @@ void	*philo_routine(void *arg)
 		philo->eaten,
 		philo->last_meal);
 
-	// ate enough
 	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
 		return (NULL);
 		// return (printf("%ld am full\n", philo->id), NULL);
@@ -150,7 +131,6 @@ void	create_philos(t_data data)
 		philos[i].eaten = 0;
 		philos[i].last_meal = 0;
 		philos[i].data = &data;
-		// pthread_mutex_init(&philos[i].fork_mutex, NULL);
 		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
 		i++;
 	}
@@ -161,7 +141,6 @@ void	create_philos(t_data data)
 	{
 		pthread_join(threads[i], NULL);
 		pthread_mutex_destroy(&data.fork_mutexes[i]);
-		// pthread_mutex_destroy(&philos[i].fork_mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&data.print);
@@ -208,10 +187,6 @@ void	print_status(t_philo philo, int status_code)
 	status[4] = "died";
 	printf("%ldms: philo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print);
-
-	// if (status_code == 4)
-	// 	// need to free and exit here; maybe with a while (1 to var) in the main ?
-	// 	return;
 }
 
 /**
@@ -230,12 +205,10 @@ int	check_args(char **av, t_data *data)
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (av[5])
 		data->meal_limit = ft_atoi(av[5]);
-
-	// to be deleted
 	else
 		data->meal_limit = 0;
-		// printf("\e[33mnothing in eat count\n\e[0m");
 
+	// debug msg
 	printf("Nb philo = '%ld'\n", data->nb_philo);
 	printf("Death time = '%ld'\n", data->time_to_die);
 	printf("Eat time = '%ld'\n", data->time_to_eat);
@@ -251,7 +224,6 @@ int	check_args(char **av, t_data *data)
 
 int	main(int ac, char **av)
 {
-	// struct timeval start_time;
 	t_data	data;
 
 	if (ac < 5 || ac > 6)
