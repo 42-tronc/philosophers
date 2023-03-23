@@ -37,7 +37,8 @@ typedef struct s_philo
 {
 	long			id;
 	long			eaten;
-	long			last_meal;
+	// long			last_meal;
+	struct timeval	last_meal;
 	t_data			*data;
 }	t_philo;
 
