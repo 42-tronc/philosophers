@@ -85,7 +85,7 @@ SRC := main.c utils.c
 all: makefolder rsc $(NAME)
 
 $(NAME): $(OBJ)
-	${CC} ${CFLAGS} -o $(NAME) $(OBJ)
+	${CC} ${CFLAGS} -o $(NAME) $(OBJ) -pthread
 	@echo -e "$(BG_LIGHT_GREEN)Compiled:\t$(RESET) $(FG_WHITE)$(UNDERLINE)$(NAME)$(RESET) has been created."
 
 $(OBJ_DIR)%.o : %.c $(HEADER)
