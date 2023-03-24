@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/24 00:04:35 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/24 14:26:02 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	*philo_routine(void *arg)
 	usleep(philo->data->time_to_sleep * 1000);
 
 	// Debug
-	// printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
-	// 	philo->id,
-	// 	philo->eaten,
-	// 	get_time(philo->last_meal));
+	printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
+		philo->id,
+		philo->eaten,
+		get_time(philo->last_meal));
 
 	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
 		return (philo->data->need_to_eat--, NULL);
@@ -96,12 +96,13 @@ int	check_death(t_data *data, t_philo *philos)
 		id = 0;
 		while(id < data->nb_philo)
 		{
+			// if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
 			if (data->need_to_eat == 0)
 				return (0);
 			since_meal = get_time(philos[id].last_meal);
 			if (since_meal > data->time_to_die)
 			{
-				printf("%d be dead, he waited %ldms\n", id + 1, since_meal);
+				printf("philo %d be dead, he waited %ldms\n", id + 1, since_meal);
 				print_status(philos[id], 4);
 				data->all_alive = 0;
 				return (1);
