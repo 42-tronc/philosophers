@@ -6,14 +6,11 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/27 14:15:25 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 14:17:11 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-long	get_time(struct timeval time);
-void	print_status(t_philo philo, int status_code);
 
 /*
 Allowed functions:
@@ -69,7 +66,7 @@ void	print_status(t_philo philo, int status_code)
  * @param data struct t_data to add each arg to
  * @return int 1 if error, 0 if all checks passed
  */
-int	check_args(char **av, t_data *data)
+static int	check_args(char **av, t_data *data)
 {
 	data->all_alive = 1;
 	data->nb_philo = ft_atoi(av[1]);
