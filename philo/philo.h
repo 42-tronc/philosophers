@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/03/23 18:24:10 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 14:18:01 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
+void	print_status(t_philo philo, int status_code);
+long	get_time(struct timeval time);
+void	create_philos(t_data *data);
 
 #endif
