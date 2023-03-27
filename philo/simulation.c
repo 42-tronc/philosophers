@@ -57,30 +57,16 @@ void	*philo_routine(void *arg)
 		usleep(30);
 	while (philo->data->all_alive)
 	{
-	// THINK
-	print_status(*philo, 0);
+		print_status(*philo, 0);
 
-	// EAT
-	if (philo->id % 2 == 0)
-		usleep(30); // a mettre en usleep a terme
+		if (philo->data->all_alive)
+			philo_eat(philo);
 
-	// printf("Philo id '%ld' will lock mutex %ld and %ld\n", philo->id, philo->id - 1, (philo->id) % philo->data->nb_philo);
-	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id - 1]);
-	print_status(*philo, 1);
-	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
-	print_status(*philo, 1);
-
-	print_status(*philo, 2);
-	gettimeofday(&philo->last_meal, NULL); // maybe move this at the end of the meal ?
-	usleep(philo->data->time_to_eat * 1000);
-	philo->eaten++;
-	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
-	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
-
-	// maybe stop here in case someone dies?
-	// SLEEP
-	print_status(*philo, 3);
-	usleep(philo->data->time_to_sleep * 1000);
+		if (philo->data->all_alive)
+		{
+			print_status(*philo, 3);
+			usleep(philo->data->time_to_sleep * 1000);
+		}
 
 		// Debug
 		// printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
