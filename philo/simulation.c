@@ -117,13 +117,13 @@ int	check_death(t_data *data, t_philo *philos)
 			{
 				if (!(data->meal_limit > 0 && philos[id].eaten >= data->meal_limit))
 				{
-					printf("%ld be dead, he waited %ldms\n", id + 1, since_meal);
+					// printf("%ld be dead, he waited %ldms\n", id + 1, since_meal);
 					print_status(philos[id], 4);
 					data->all_alive = 0;
 					return (1);
 				}
-				else
-					printf("%ld has eaten enough, hes not dead\n", id + 1);
+				// else
+					// printf("%ld has eaten enough, hes not dead\n", id + 1);
 			}
 			id++;
 		}
