@@ -88,9 +88,9 @@ void	*philo_routine(void *arg)
 		// 	philo->eaten,
 		// 	get_time(philo->last_meal));
 
-	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
-		return (philo->data->need_to_eat--, NULL);
-		// return (printf("%ld am full\n", philo->id), philo->data->need_to_eat--, NULL);
+		if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
+			// return (printf("%ld am full\n", philo->id), philo->data->need_to_eat--, NULL);
+			return (philo->data->need_to_eat--, NULL);
 	}
 	return (NULL);
 }
