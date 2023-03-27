@@ -82,7 +82,7 @@ void	*philo_routine(void *arg)
 	print_status(*philo, 3);
 	usleep(philo->data->time_to_sleep * 1000);
 
-	// Debug
+		// Debug
 		// printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
 		// 	philo->id,
 		// 	philo->eaten,
