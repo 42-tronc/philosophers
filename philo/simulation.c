@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:14:43 by croy              #+#    #+#             */
-/*   Updated: 2023/03/27 14:22:11 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 21:40:38 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	check_death(t_data *data, t_philo *philos)
 				{
 					// printf("%ld be dead, he waited %ldms\n", id + 1, since_meal);
 					print_status(philos[id], 4);
+					pthread_mutex_unlock(&data->fork_mutexes[id]);
+					pthread_mutex_unlock(&data->fork_mutexes[id + 1 % data->nb_philo]);
 					data->all_alive = 0;
 					return (1);
 				}
