@@ -12,6 +12,34 @@
 
 #include "philo.h"
 
+void	philo_eat(t_philo *philo)
+{
+	// printf("Philo id '%ld' will lock mutex %ld and %ld\n", philo->id, philo->id - 1, (philo->id) % philo->data->nb_philo);
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id - 1]);
+	if (!philo->data->all_alive)
+	{
+		// printf("\n%ld sees %d now\n", philo->id, philo->data->all_alive);
+		pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
+		return;
+	}
+	print_status(*philo, 1);
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
+	if (!philo->data->all_alive)
+	{
+		// printf("\n%ld sees %d now again\n", philo->id, philo->data->all_alive);
+		pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
+		return;
+	}
+	print_status(*philo, 1);
+
+	print_status(*philo, 2);
+	gettimeofday(&philo->last_meal, NULL); // maybe move this at the end of the meal ?
+	usleep(philo->data->time_to_eat * 1000);
+	philo->eaten++;
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
+}
+
 /**
  * @brief Create the philosophers' routine (think, eat, sleep)
  * It will lock each fork, eat then unlock those. Sleep for a timed duration
