@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/27 14:17:11 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 21:19:44 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	print_status(t_philo philo, int status_code)
 	status[2] = "is eating";
 	status[3] = "is sleeping";
 	status[4] = "died";
-	printf("%ldms: philo %ld %s\n", timestamp, philo.id, status[status_code]);
+	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print);
 }
 
@@ -80,11 +80,11 @@ static int	check_args(char **av, t_data *data)
 		data->meal_limit = 0;
 
 	// debug msg
-	printf("Nb philo = '%ld'\n", data->nb_philo);
-	printf("Death time = '%ld'\n", data->time_to_die);
-	printf("Eat time = '%ld'\n", data->time_to_eat);
-	printf("Sleep time = '%ld'\n", data->time_to_sleep);
-	printf("Meal limit = '%ld'\n", data->meal_limit);
+	// printf("Nb philo = '%ld'\n", data->nb_philo);
+	// printf("Death time = '%ld'\n", data->time_to_die);
+	// printf("Eat time = '%ld'\n", data->time_to_eat);
+	// printf("Sleep time = '%ld'\n", data->time_to_sleep);
+	// printf("Meal limit = '%ld'\n", data->meal_limit);
 	// up to here
 
 	if (data->nb_philo <= 0 || data->time_to_die <= 0 || data->time_to_eat <= 0
@@ -107,7 +107,7 @@ int	main(int ac, char **av)
 	create_philos(&data);
 
 	// Get elapsed time in milliseconds
-	printf("Runtime: %ldms\n\n", get_time(data.start_time));
+	// printf("Runtime: %ldms\n", get_time(data.start_time));
 
 	return (0);
 }
