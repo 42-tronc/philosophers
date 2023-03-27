@@ -53,6 +53,8 @@ void	*philo_routine(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo*) arg;
+	if (philo->id % 2 == 0)
+		usleep(30);
 	while (philo->data->all_alive)
 	{
 	// THINK
