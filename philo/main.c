@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/27 14:06:58 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 14:11:12 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ void	*philo_routine(void *arg)
 	gettimeofday(&philo->last_meal, NULL); // maybe move this at the end of the meal ?
 	usleep(philo->data->time_to_eat * 1000);
 	philo->eaten++;
-	// either take from start of prog: Xms
-	// or take from last meal and
-	// philo->last_meal = get_time(philo->data->time); // takes timestamp since start N ms
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
 
@@ -145,9 +142,7 @@ void	create_philos(t_data *data)
 	{
 		philos[i].id = i + 1;
 		philos[i].eaten = 0;
-		// philos[i].last_meal = 0;
 		gettimeofday(&philos[i].last_meal, NULL);
-		// philos[i].data = &data;
 		philos[i].data = data; // Pass a pointer to the t_data structure
 		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
 		i++;
@@ -204,9 +199,6 @@ void	print_status(t_philo philo, int status_code)
 	status[2] = "is eating";
 	status[3] = "is sleeping";
 	status[4] = "died";
-	(void) status;
-	(void) status_code;
-	(void) timestamp;
 	printf("%ldms: philo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print);
 }
