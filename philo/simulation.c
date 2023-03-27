@@ -83,10 +83,10 @@ void	*philo_routine(void *arg)
 	usleep(philo->data->time_to_sleep * 1000);
 
 	// Debug
-	printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
-		philo->id,
-		philo->eaten,
-		get_time(philo->last_meal));
+		// printf("Philo %ld, meal eaten=%ld, last meal=%ld\n",
+		// 	philo->id,
+		// 	philo->eaten,
+		// 	get_time(philo->last_meal));
 
 	if (philo->data->meal_limit > 0 && philo->eaten >= philo->data->meal_limit)
 		return (philo->data->need_to_eat--, NULL);
