@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/27 14:11:12 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 14:13:36 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,16 +168,12 @@ void	create_philos(t_data *data)
  */
 long	get_time(struct timeval time)
 {
-	struct timeval now;
-	long milliseconds;
+	struct	timeval now;
+	long	milliseconds;
 
 	gettimeofday(&now, NULL);
 	milliseconds = (now.tv_sec - time.tv_sec) * 1000 +
 		(now.tv_usec - time.tv_usec) / 1000;
-
-	// printf("\nget_time(): rnow.tv_sec=%ld, rnow.tv_usec=%ld\n", now.tv_sec, now.tv_usec);
-	// printf("get_time(): time.tv_sec=%ld, time.tv_usec=%ld\n", time.tv_sec, time.tv_usec);
-	// printf("get_time(): milliseconds=%ld\n", milliseconds);
 	return (milliseconds);
 }
 
