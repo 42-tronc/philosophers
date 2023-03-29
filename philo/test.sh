@@ -1,6 +1,11 @@
 #!/bin/bash
 # by Maplepy
 
+# # Set the duration of the test in seconds
+# DURATION=60
+# # Wait for the program to exit or for the duration of the test
+# sleep $DURATION
+
 orange="\e[38;5;208m"
 light_orange="\e[38;5;214m"
 yellow="\e[38;5;220m"
