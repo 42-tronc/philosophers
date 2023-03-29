@@ -72,7 +72,7 @@ echo -e "\ec${fg_green}
 print_info() {
 	printf "\n\n$orange%*s" "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 	# echo -e "\n\t${orange}------------------------${reset}"
-	echo -e "${light_orange}${reset} ${bold}$1${reset}\n"
+	echo -e "${light_orange}●◯${reset} ${bold}$1${reset}\n"
 }
 
 print_test() {
