@@ -78,7 +78,7 @@ print_info() {
 print_test() {
 	# printf "\n$orange%*s" "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 	# echo -e "\n\t${orange}------------------------${reset}"
-	echo -e  "\n\t${light_orange}${bold}${reset} Running test with: ${yellow}${bold}'$1'${reset}"
+	echo -e  "\n\t${light_orange}${bold}○${reset} Running test with: ${yellow}${bold}'$1'${reset}"
 }
 
 print_success() {
