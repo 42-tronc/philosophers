@@ -148,6 +148,7 @@ run_unit_test() {
 		# sleep $timeout
 		print_success "Program kept running ($runtime ms)"
 		kill "$pid"
+
 	# no meal count required and should live
 	# elif [[ "$5" == "-1" ]]; then
 	# 	echo "The two strings are the same"
