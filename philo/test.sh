@@ -108,16 +108,24 @@ run_leak_test() {
 }
 
 run_unit_test() {
+	# nb_philo death_time eat_time sleep_time (meal_required) timeout
 	start_time=$(date +%s.%N)
+	nb_philo=$1
+	death_time=$2
+	eat_time=$3
+	sleep_time=$4
 
 	# no meal count required
 	if [[ -z "$6" ]]; then
-		print_test "$1 $2 $3 $4"
-		./philo "$1" "$2" "$3" "$4" 2>&1 | tail -n 1 &
+		timeout=$5
+		print_test "$nb_philo $death_time $eat_time $sleep_time"
+		./philo "$nb_philo" "$death_time" "$eat_time" "$sleep_time" 2>&1 | tail -n 1 &
 	# meal count required
 	else
-		print_test "$1 $2 $3 $4 $5"
-		./philo "$1" "$2" "$3" "$4" "$5" 2>&1 | tail -n 1 &
+		meal_required=$5
+		timeout=$6
+		print_test "$nb_philo $death_time $eat_time $sleep_time $meal_required"
+		./philo "$nb_philo" "$death_time" "$eat_time" "$sleep_time" "$meal_required" 2>&1 | tail -n 1 &
 	fi
 	pid=$!
 	# echo "pid = $pid"
