@@ -145,7 +145,7 @@ run_unit_test() {
 
 	# if no meal required and timeout not -1 (should run indefinitely and manually killed)
 	if [[ -z "$6" ]]; then
-		# sleep 30
+		# sleep $timeout
 		print_success "Program kept running ($runtime ms)"
 		kill "$pid"
 	# no meal count required and should live
