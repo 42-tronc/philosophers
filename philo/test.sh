@@ -88,47 +88,6 @@ print_success() {
 print_error() {
 	echo -e "${fg_red}${bold}✕\t[ERROR]${reset} ${bold}$1${reset}"
 }
-# run_unit_test() {
-#     num_philosophers=$1
-#     time_to_die=$2
-#     time_to_eat=$3
-#     time_to_sleep=$4
-
-#     print_info "Running test with $num_philosophers philosophers, time to die: $time_to_die ms, time to eat: $time_to_eat ms, time to sleep: $time_to_sleep ms"
-
-#     ./philo $num_philosophers $time_to_die $time_to_eat $time_to_sleep &
-#     pid=$!
-
-#     sleep $((time_to_die + 100))
-#     if kill -0 $pid >/dev/null 2>&1; then
-#         echo -e "\n\t${bold}${yellow}ERROR:${reset} Philosopher did not die in time"
-#         kill -9 $pid >/dev/null 2>&1
-#     else
-#         print_success "Philosopher died in time"
-#     fi
-# }
-
-# run_unit_test() {
-#     num_philosophers=$1
-#     time_to_die=$2
-#     time_to_eat=$3
-#     time_to_sleep=$4
-#     print_info "Running unit test with ${num_philosophers} philosophers, time_to_die=${time_to_die}, time_to_eat=${time_to_eat}, time_to_sleep=${time_to_sleep}"
-#     ./philo ${num_philosophers} ${time_to_die} ${time_to_eat} ${time_to_sleep} > /dev/null &
-#     test_pid=$!
-#     sleep 1
-#     if ps -p $test_pid > /dev/null; then
-#         sleep $((time_to_die + 1))
-#         if ps -p $test_pid > /dev/null; then
-#             kill -9 $test_pid
-#             print_success "Test passed"
-#         else
-#             print "Test failed: philosopher(s) died unexpectedly"
-#         fi
-#     else
-#         printf "Test failed: program exited unexpectedly"
-#     fi
-# }
 
 run_leak_test() {
 	print_test "$1 $2 $3 $4 $5"
