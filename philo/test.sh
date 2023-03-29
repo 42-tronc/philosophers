@@ -157,7 +157,7 @@ run_unit_test() {
 	# meal count required
 	else
 		# runtime too long
-		if [ "$runtime" -gt "$6" ]; then
+		if [ "$runtime" -gt "$timeout" ]; then
 			echo "Program took too long to run"
 			print_error "Test failed: program did not exit after $6 ms"
 			kill "$pid"
