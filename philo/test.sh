@@ -136,7 +136,14 @@ run_unit_test() {
 	runtime=$(echo "($end_time - $start_time) * 1000" | bc -l | cut -d '.' -f 1)
 	# echo -e "${bg_cyan}-> Runtime: $runtime ms${reset}"
 
-	# if no meal count required and should die
+
+	# 3 possible cases
+	# - program shuts down by itself (death of philo or ate enough SUCCESS if within timeout)
+	# - program runs indefinitely (philos can eat forever so need to kill manually so SUCCESS)
+	# - program should not run indefinitely (check if so and kill manually but ERROR)
+
+
+	# if no meal required and timeout not -1 (should run indefinitely and manually killed)
 	if [[ -z "$6" ]]; then
 		# sleep 30
 		print_success "Program kept running ($runtime ms)"
