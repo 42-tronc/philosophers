@@ -180,9 +180,10 @@ make re
 
 # philo death tests
 print_info "Launching death tests..."
-run_unit_test 1 200 50 50 50 210
-run_unit_test 1 200 50 50 50
-run_unit_test 4 310 200 100
+# nb_philo death_time eat_time sleep_time (meal_required) timeout
+run_unit_test 1	200	50	50	50	210
+run_unit_test 1	200	50	50		-1
+run_unit_test 4	310	200	100		-1
 
 print_info "Launching infinite-ish tests..."
 run_unit_test 5 800 200 200 -1
