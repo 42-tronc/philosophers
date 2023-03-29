@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:14:43 by croy              #+#    #+#             */
-/*   Updated: 2023/03/29 16:25:55 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 21:40:38 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int	check_death(t_data *data, t_philo *philos)
 					data->all_alive = 0;
 					return (1);
 				}
-				else
-					printf("%ld has eaten enough, hes not dead\n", id + 1);
+				// else
+					// printf("%ld has eaten enough, hes not dead\n", id + 1);
 			}
 			id++;
 		}
@@ -136,8 +136,7 @@ void	create_philos(t_data *data)
 	// initialize fork mutexes
 	i = 0;
 	while (i < data->nb_philo)
-		if (pthread_mutex_init(&fork_mutex[i++], NULL));
-			ugh
+		pthread_mutex_init(&fork_mutex[i++], NULL);
 	data->fork_mutexes = fork_mutex;
 
 	// initialize print mutex
