@@ -127,10 +127,11 @@ run_unit_test() {
 		print_test "$nb_philo $death_time $eat_time $sleep_time $meal_required"
 		./philo "$nb_philo" "$death_time" "$eat_time" "$sleep_time" "$meal_required" 2>&1 | tail -n 1 &
 	fi
+
+	# get runtime
 	pid=$!
 	# echo "pid = $pid"
 	wait "$pid"
-
 	end_time=$(date +%s.%N)
 	runtime=$(echo "($end_time - $start_time) * 1000" | bc -l | cut -d '.' -f 1)
 	# echo -e "${bg_cyan}-> Runtime: $runtime ms${reset}"
