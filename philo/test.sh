@@ -188,7 +188,7 @@ make re
 
 # philo death tests
 print_info "Launching death tests..."
-# nb_philo death_time eat_time sleep_time (meal_required) timeout
+# nb_philo death_time eat_time sleep_time (meal_required) <timeout in sec>
 run_unit_test 1	200	50	50	50	210
 run_unit_test 1	200	50	50		-1
 run_unit_test 4	310	200	100		-1
