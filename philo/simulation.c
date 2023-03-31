@@ -6,13 +6,44 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:14:43 by croy              #+#    #+#             */
-/*   Updated: 2023/03/27 21:40:38 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 15:05:34 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_eat(t_philo *philo)
+void philo_eat(t_philo *philo)
+{
+	int first_fork, second_fork;
+
+	// Determine the order of acquiring the locks based on the fork index
+	if (philo->id % 2 == 0) {
+		first_fork = philo->id - 1;
+		second_fork = philo->id % philo->data->nb_philo;
+	} else {
+		first_fork = philo->id % philo->data->nb_philo;
+		second_fork = philo->id - 1;
+	}
+	printf("Philo id '%ld' will lock mutex %d and %d\n", philo->id, first_fork, second_fork);
+
+	// Acquire the locks in the strict order
+	pthread_mutex_lock(&philo->data->fork_mutexes[first_fork]);
+	print_status(*philo, 1);
+	pthread_mutex_lock(&philo->data->fork_mutexes[second_fork]);
+	print_status(*philo, 1);
+	print_status(*philo, 2);
+
+	// Do the eating
+	gettimeofday(&philo->last_meal, NULL);
+	usleep(philo->data->time_to_eat * 1000);
+	philo->eaten++;
+
+	// Release the locks in the reverse order
+	pthread_mutex_unlock(&philo->data->fork_mutexes[second_fork]);
+	pthread_mutex_unlock(&philo->data->fork_mutexes[first_fork]);
+}
+
+/* void	philo_eat(t_philo *philo)
 {
 	// printf("Philo id '%ld' will lock mutex %ld and %ld\n", philo->id, philo->id - 1, (philo->id) % philo->data->nb_philo);
 	pthread_mutex_lock(&philo->data->fork_mutexes[philo->id - 1]);
@@ -38,7 +69,7 @@ void	philo_eat(t_philo *philo)
 	philo->eaten++;
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
-}
+} */
 
 /**
  * @brief Create the philosophers' routine (think, eat, sleep)
@@ -107,8 +138,8 @@ int	check_death(t_data *data, t_philo *philos)
 				{
 					// printf("%ld be dead, he waited %ldms\n", id + 1, since_meal);
 					print_status(philos[id], 4);
-					pthread_mutex_unlock(&data->fork_mutexes[id]);
-					pthread_mutex_unlock(&data->fork_mutexes[id + 1 % data->nb_philo]);
+					// pthread_mutex_unlock(&data->fork_mutexes[id]);
+					// pthread_mutex_unlock(&data->fork_mutexes[id + 1 % data->nb_philo]);
 					data->all_alive = 0;
 					return (1);
 				}
@@ -161,7 +192,7 @@ void	create_philos(t_data *data)
 	while (i < data->nb_philo)
 	{
 		pthread_join(threads[i], NULL);
-		pthread_mutex_destroy(&data->fork_mutexes[i]);
+		// pthread_mutex_destroy(&data->fork_mutexes[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&data->print);
