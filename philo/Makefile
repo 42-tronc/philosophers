@@ -6,7 +6,7 @@
 #    By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 13:33:54 by croy              #+#    #+#              #
-#    Updated: 2023/03/27 14:16:15 by croy             ###   ########lyon.fr    #
+#    Updated: 2023/03/31 14:06:05 by croy             ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ RESET		:= \033[0m
 
 # ---------- BASIC VARIABLES ----------
 CFLAGS := -Wall -Wextra -Werror
-FSANITIZE = -fsanitize=address
+FSANITIZE = -fsanitize=thread
 RM := rm -rf
 
 OBJ_DIR := obj/
