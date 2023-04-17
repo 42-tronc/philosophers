@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/03/27 21:19:44 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 14:49:55 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ Allowed functions:
  */
 long	get_time(struct timeval time)
 {
-	struct	timeval now;
-	long	milliseconds;
+	struct timeval	now;
+	long			milliseconds;
 
 	gettimeofday(&now, NULL);
 	milliseconds = (now.tv_sec - time.tv_sec) * 1000 +
@@ -54,8 +54,9 @@ void	print_status(t_philo philo, int status_code)
 	status[1] = "has taken a fork";
 	status[2] = "is eating";
 	status[3] = "is sleeping";
-	status[4] = "died";
-	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
+	status[4] = "\e[31;1mdied 💀💀💀\e[0m";
+	// if (philo.data->all_alive)
+		printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print);
 }
 
