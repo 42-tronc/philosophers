@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/03/29 16:25:41 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 14:58:01 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define PHILO_H
 
 # include <pthread.h>
-# include <stddef.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <sys/time.h>
 # include <unistd.h>
+# include <sys/time.h>
+// # include <stddef.h>
+// # include <stdlib.h>
 
 typedef struct s_data
 {
