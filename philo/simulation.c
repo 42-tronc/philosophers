@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:14:43 by croy              #+#    #+#             */
-/*   Updated: 2023/03/31 15:05:34 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/04/17 14:52:18 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void philo_eat(t_philo *philo)
 	int first_fork, second_fork;
 
 	// Determine the order of acquiring the locks based on the fork index
-	if (philo->id % 2 == 0) {
+	if (philo->id % 2 == 0)
+	{
 		first_fork = philo->id - 1;
 		second_fork = philo->id % philo->data->nb_philo;
-	} else {
+	}
+	else
+	{
 		first_fork = philo->id % philo->data->nb_philo;
 		second_fork = philo->id - 1;
 	}
@@ -28,12 +31,19 @@ void philo_eat(t_philo *philo)
 
 	// Acquire the locks in the strict order
 	pthread_mutex_lock(&philo->data->fork_mutexes[first_fork]);
+	if (!philo->data->all_alive)
+	{
+		printf("\n%ld sees all alive=%d now\n", philo->id, philo->data->all_alive);
+		pthread_mutex_unlock(&philo->data->fork_mutexes[first_fork]);
+		return;
+	}
 	print_status(*philo, 1);
+
 	pthread_mutex_lock(&philo->data->fork_mutexes[second_fork]);
 	print_status(*philo, 1);
-	print_status(*philo, 2);
 
 	// Do the eating
+	print_status(*philo, 2);
 	gettimeofday(&philo->last_meal, NULL);
 	usleep(philo->data->time_to_eat * 1000);
 	philo->eaten++;
@@ -42,6 +52,51 @@ void philo_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->fork_mutexes[second_fork]);
 	pthread_mutex_unlock(&philo->data->fork_mutexes[first_fork]);
 }
+
+/* void	philo_eat(t_philo *philo)
+{
+	int	first_fork, second_fork;
+
+	// Determine the order of acquiring the locks based on the fork index
+	if (philo->id % 2 == 0)
+	{
+		first_fork = philo->id - 1;
+		second_fork = philo->id % philo->data->nb_philo;
+	}
+	else
+	{
+		first_fork = philo->id % philo->data->nb_philo;
+		second_fork = philo->id - 1;
+	}
+
+	printf("Philo id '%ld' will lock mutex %ld and %ld\n", philo->id, philo->id - 1, (philo->id) % philo->data->nb_philo);
+	printf("\n%ld sees %d\n", philo->id, philo->data->all_alive);
+	pthread_mutex_lock(&philo->data->fork_mutexes[first_fork]);
+	if (!philo->data->all_alive)
+	{
+		// printf("\n%ld sees %d now\n", philo->id, philo->data->all_alive);
+		pthread_mutex_unlock(&philo->data->fork_mutexes[first_fork]);
+		return;
+	}
+	print_status(*philo, 1);
+
+	printf("\n%ld sees %d now\n", philo->id, philo->data->all_alive);
+	pthread_mutex_lock(&philo->data->fork_mutexes[second_fork]);
+	if (!philo->data->all_alive)
+	{
+		// printf("\n%ld sees %d now again\n", philo->id, philo->data->all_alive);
+		pthread_mutex_unlock(&philo->data->fork_mutexes[second_fork]);
+		return;
+	}
+	print_status(*philo, 1);
+
+	print_status(*philo, 2);
+	gettimeofday(&philo->last_meal, NULL); // maybe move this at the end of the meal ?
+	usleep(philo->data->time_to_eat * 1000);
+	philo->eaten++;
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id - 1]);
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->id % philo->data->nb_philo]);
+} */
 
 /* void	philo_eat(t_philo *philo)
 {
@@ -88,7 +143,8 @@ void	*philo_routine(void *arg)
 		usleep(30);
 	while (philo->data->all_alive)
 	{
-		print_status(*philo, 0);
+		if (philo->data->all_alive)
+			print_status(*philo, 0);
 
 		if (philo->data->all_alive)
 			philo_eat(philo);
@@ -136,7 +192,7 @@ int	check_death(t_data *data, t_philo *philos)
 			{
 				if (!(data->meal_limit > 0 && philos[id].eaten >= data->meal_limit))
 				{
-					// printf("%ld be dead, he waited %ldms\n", id + 1, since_meal);
+					printf("\e[31;1m%ld be dead, he waited %ldms\e[0m\n", id + 1, since_meal);
 					print_status(philos[id], 4);
 					// pthread_mutex_unlock(&data->fork_mutexes[id]);
 					// pthread_mutex_unlock(&data->fork_mutexes[id + 1 % data->nb_philo]);
@@ -148,7 +204,7 @@ int	check_death(t_data *data, t_philo *philos)
 			}
 			id++;
 		}
-		usleep(1000); // maybe put less than 1ms or calculate ideal time
+		// usleep(10); // maybe put less than 1ms or calculate ideal time
 	}
 	return (0);
 }
