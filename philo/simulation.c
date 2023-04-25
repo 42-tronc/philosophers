@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:14:43 by croy              #+#    #+#             */
-/*   Updated: 2023/04/17 14:52:18 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/04/25 14:59:31 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ int	check_death(t_data *data, t_philo *philos)
 			if (data->need_to_eat == 0)
 				return (0);
 			since_meal = get_time(philos[id].last_meal); // maybe refact this line
-			if (since_meal > data->time_to_die)
+			if (since_meal >= data->time_to_die)
 			{
 				if (!(data->meal_limit > 0 && philos[id].eaten >= data->meal_limit))
 				{
@@ -217,7 +217,7 @@ int	check_death(t_data *data, t_philo *philos)
 void	create_philos(t_data *data)
 {
 	int				i;
-	t_philo			philos[data->nb_philo];
+	t_philo			philosc[data->nb_philo];
 	pthread_mutex_t	fork_mutex[data->nb_philo];
 
 	// initialize fork mutexes
