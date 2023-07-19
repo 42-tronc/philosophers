@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/04/17 14:49:55 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/07/19 21:25:52 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,9 @@ int	main(int ac, char **av)
 	if (ac < 5 || ac > 6)
 		return (printf("Expected: ./philo <nb of philosophers> <time to die> "\
 		"<time to eat> <time to sleep> (philosophers eat count wanted)\n"), 1);
-
 	if (check_args(av, &data))
 		return (1);
-	gettimeofday(&data.start_time, NULL);
+	gettimeofday(&data.start_time, NULL); // get start time of simulation
 	create_philos(&data);
 
 	// Get elapsed time in milliseconds
