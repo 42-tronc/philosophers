@@ -6,7 +6,7 @@
 #    By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 13:33:54 by croy              #+#    #+#              #
-#    Updated: 2023/03/31 14:06:05 by croy             ###   ########lyon.fr    #
+#    Updated: 2023/07/19 21:26:42 by croy             ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,17 +82,17 @@ SRC := main.c simulation.c utils.c
 
 
 # -------------- RECIPES --------------
-all: makefolder rsc $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	${CC} ${CFLAGS} -o $(NAME) $(OBJ) -pthread
 	@echo -e "$(BG_LIGHT_GREEN)Compiled:\t$(RESET) $(FG_WHITE)$(UNDERLINE)$(NAME)$(RESET) has been created."
 
-$(OBJ_DIR)%.o : %.c $(HEADER)
+# $(OBJ_DIR)%.o : $(DIR_UTILS)%.c $(HEADER) | $(OBJ_DIR)
+$(OBJ_DIR)%.o : %.c $(HEADER) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-
-makefolder :
+$(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
 
 clean:
@@ -105,10 +105,9 @@ fclean: clean
 	@echo -e "$(FG_RED)FClean:\t\t $(FG_LIGHT_GRAY)$(UNDERLINE)$(NAME)$(RESET) has been deleted."
 
 re: fclean
-	@$(MAKE) rsc
 	@$(MAKE) all
 
-debug: makefolder rsc $(OBJ)
+debug: makefolder $(OBJ)
 	${CC} $(FSANITIZE) ${CFLAGS} -o $(NAME) $(OBJ)
 
 run :
@@ -120,4 +119,4 @@ run :
 #	@./test.out | cat -e
 #	$(RM) test.out
 
-.PHONY: all rsc makefolder clean fclean re debug test
+.PHONY: all makefolder clean fclean re debug test
