@@ -6,13 +6,13 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:14:43 by croy              #+#    #+#             */
-/*   Updated: 2023/04/25 15:00:36 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/07/19 21:25:59 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void philo_eat(t_philo *philo)
+void	philo_eat(t_philo *philo)
 {
 	int first_fork, second_fork;
 
@@ -217,8 +217,15 @@ int	check_death(t_data *data, t_philo *philos)
 void	create_philos(t_data *data)
 {
 	int				i;
-	t_philo			philos[data->nb_philo];
-	pthread_mutex_t	fork_mutex[data->nb_philo];
+	t_philo			*philos;
+	pthread_t		*threads;
+	pthread_mutex_t	*fork_mutex;
+
+	philos = malloc(sizeof(t_philo) * data->nb_philo);
+	if (!philos)
+		return ;
+	threads = malloc(sizeof(pthread_t) * data->nb_philo);
+	fork_mutex = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 
 	// initialize fork mutexes
 	i = 0;
@@ -230,7 +237,6 @@ void	create_philos(t_data *data)
 	pthread_mutex_init(&data->print, NULL);
 
 	// create threads and fork mutexes for each philo
-	pthread_t threads[data->nb_philo];
 	i = 0;
 	while (i < data->nb_philo)
 	{
