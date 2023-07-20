@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:14:43 by croy              #+#    #+#             */
-/*   Updated: 2023/07/19 21:25:59 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/07/19 22:13:21 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,55 +207,4 @@ int	check_death(t_data *data, t_philo *philos)
 		// usleep(10); // maybe put less than 1ms or calculate ideal time
 	}
 	return (0);
-}
-
-/**
- * @brief create each philo, init its vars, mutexes and start the simulation
- *
- * @param data t_data struct, to pass it to each philo
- */
-void	create_philos(t_data *data)
-{
-	int				i;
-	t_philo			*philos;
-	pthread_t		*threads;
-	pthread_mutex_t	*fork_mutex;
-
-	philos = malloc(sizeof(t_philo) * data->nb_philo);
-	if (!philos)
-		return ;
-	threads = malloc(sizeof(pthread_t) * data->nb_philo);
-	fork_mutex = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-
-	// initialize fork mutexes
-	i = 0;
-	while (i < data->nb_philo)
-		pthread_mutex_init(&fork_mutex[i++], NULL);
-	data->fork_mutexes = fork_mutex;
-
-	// initialize print mutex
-	pthread_mutex_init(&data->print, NULL);
-
-	// create threads and fork mutexes for each philo
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		philos[i].id = i + 1;
-		philos[i].eaten = 0;
-		gettimeofday(&philos[i].last_meal, NULL);
-		philos[i].data = data; // Pass a pointer to the t_data structure
-		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
-		i++;
-	}
-
-	check_death(data, philos);
-	// wait for threads to finish and destroy mutexes
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		pthread_join(threads[i], NULL);
-		// pthread_mutex_destroy(&data->fork_mutexes[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&data->print);
 }

@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:32:09 by croy              #+#    #+#             */
-/*   Updated: 2023/07/19 21:25:52 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/07/19 23:01:51 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,132 @@ static int	check_args(char **av, t_data *data)
 	return (0);
 }
 
+// /**
+//  * @brief create each philo, init its vars, mutexes and start the simulation
+//  *
+//  * @param data t_data struct, to pass it to each philo
+//  */
+// void	create_philos(t_data *data)
+// {
+// 	int				i;
+// 	t_philo			*philos;
+// 	pthread_t		*threads;
+// 	pthread_mutex_t	*fork_mutex;
+
+// 	philos = malloc(sizeof(t_philo) * data->nb_philo);
+// 	if (!philos)
+// 		return ;
+// 	threads = malloc(sizeof(pthread_t) * data->nb_philo);
+// 	fork_mutex = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+
+// 	// initialize fork mutexes
+// 	i = 0;
+// 	while (i < data->nb_philo)
+// 		pthread_mutex_init(&fork_mutex[i++], NULL);
+// 	data->fork_mutexes = fork_mutex;
+
+// 	// initialize print mutex
+// 	pthread_mutex_init(&data->print, NULL);
+
+// 	// create threads and fork mutexes for each philo
+// 	i = 0;
+// 	while (i < data->nb_philo)
+// 	{
+// 		philos[i].id = i + 1;
+// 		philos[i].eaten = 0;
+// 		gettimeofday(&philos[i].last_meal, NULL);
+// 		philos[i].data = data; // Pass a pointer to the t_data structure
+// 		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
+// 		i++;
+// 	}
+
+// 	check_death(data, philos);
+// 	// wait for threads to finish and destroy mutexes
+// 	i = 0;
+// 	while (i < data->nb_philo)
+// 	{
+// 		pthread_join(threads[i], NULL);
+// 		// pthread_mutex_destroy(&data->fork_mutexes[i]);
+// 		i++;
+// 	}
+// 	pthread_mutex_destroy(&data->print);
+// }
+
+/**
+ * @brief initialize philo's vars and mutexes
+ *
+ * @param data t_data struct, to pass it to each philo
+ * @return t_philo* pointer to the array of philos
+ */
+t_philo	*init_data(t_data *data)
+{
+    int				i;
+	t_philo			*philos;
+	pthread_mutex_t	*fork_mutex;
+
+	philos = malloc(sizeof(t_philo) * data->nb_philo);
+	if (!philos)
+		return (NULL);
+	fork_mutex = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!fork_mutex)
+		return (NULL);
+	i = 0;
+	while (i < data->nb_philo)
+		pthread_mutex_init(&fork_mutex[i++], NULL);
+	data->fork_mutexes = fork_mutex;
+	pthread_mutex_init(&data->print, NULL);
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		philos[i].id = i + 1;
+		philos[i].eaten = 0;
+		gettimeofday(&philos[i].last_meal, NULL);
+		philos[i].data = data; // Pass a pointer to the t_data structure
+		i++;
+	}
+	return (philos);
+}
+
+/**
+ * @brief launch the simulation by creating threads for each philo
+ *
+ * @param data t_data struct
+ * @param philos t_philo struct array containing each philo
+ */
+void	launch_simulation(t_data *data, t_philo *philos)
+{
+	int				i;
+	pthread_t		*threads;
+
+	threads = malloc(sizeof(pthread_t) * data->nb_philo);
+	// create threads for each philo
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_create(&threads[i], NULL, philo_routine, (void *)&philos[i]);
+		i++;
+	}
+
+	check_death(data, philos);
+	// wait for threads to finish and destroy mutexes
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_join(threads[i], NULL);
+		// pthread_mutex_destroy(&data->fork_mutexes[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&data->print);
+	free(threads);
+	free(philos);
+	free(data->fork_mutexes);
+}
+
+
 int	main(int ac, char **av)
 {
 	t_data	data;
+	t_philo	*philos;
 
 	if (ac < 5 || ac > 6)
 		return (printf("Expected: ./philo <nb of philosophers> <time to die> "\
@@ -104,7 +227,11 @@ int	main(int ac, char **av)
 	if (check_args(av, &data))
 		return (1);
 	gettimeofday(&data.start_time, NULL); // get start time of simulation
-	create_philos(&data);
+	// create_philos(&data);
+	philos = init_data(&data);
+	if (!philos)
+		return (1);
+	launch_simulation(&data, philos);
 
 	// Get elapsed time in milliseconds
 	// printf("Runtime: %ldms\n", get_time(data.start_time));
