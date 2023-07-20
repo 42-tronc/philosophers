@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/07/19 19:21:23 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/07/20 00:19:39 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ typedef struct s_philo
 // main.c
 long	get_time(struct timeval time);
 void	print_status(t_philo philo, int status_code);
+t_philo	*init_data(t_data *data);
+void	launch_simulation(t_data *data, t_philo *philos);
 
 // simulation.c
 void	philo_eat(t_philo *philo);
 void	*philo_routine(void *arg);
 int	check_death(t_data *data, t_philo *philos);
-void	create_philos(t_data *data);
 
 // utils.c
 int	ft_atoi(const char *str);
