@@ -117,4 +117,9 @@ debug: fclean $(NAME)
 run : all
 	./$(NAME) $(ARG)
 
-.PHONY: all clean fclean re debug run
+valgrind: all
+	valgrind --tool=helgrind ./$(NAME) $(ARG)
+	@echo -e "\n\n\n"
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG)
+
+.PHONY: all clean fclean re debug run valgrind
