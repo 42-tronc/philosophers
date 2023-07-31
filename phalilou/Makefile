@@ -112,7 +112,7 @@ re: fclean
 	@$(MAKE) all
 
 debug: CFLAGS += $(FSANITIZE)
-debug: $(NAME)
+debug: fclean $(NAME)
 
 run : all
 	./$(NAME) $(ARG)
