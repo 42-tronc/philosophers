@@ -6,7 +6,7 @@
 #    By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 13:33:54 by croy              #+#    #+#              #
-#    Updated: 2023/07/20 16:51:19 by croy             ###   ########lyon.fr    #
+#    Updated: 2023/07/31 14:02:01 by croy             ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ HDR_FOLDER := header/
 SRC = $(addprefix $(SRC_FOLDER), $(SRC_FILES))
 OBJ = $(subst $(SRC_FOLDER),$(OBJ_FOLDER),$(SRC:.c=.o))
 
-CFLAGS := -Wall -Wextra -Werror -I./$(HDR_FOLDER)
+CFLAGS := -Wall -Wextra -Werror -pthread -I./$(HDR_FOLDER)
 FSANITIZE := -fsanitize=thread -g3
 RM := rm -rf
 
@@ -90,7 +90,7 @@ SRC_FILES := main.c
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	${CC} ${CFLAGS} -o $(NAME) $(OBJ) -pthread
+	${CC} ${CFLAGS} -o $(NAME) $(OBJ)
 	@echo -e "$(BG_LIGHT_GREEN)Compiled:\t$(RESET) $(FG_WHITE)$(UNDERLINE)$(NAME)$(RESET) has been created."
 
 $(OBJ_FOLDER)%.o : $(SRC_FOLDER)%.c $(HEADER) | $(OBJ_FOLDER)
