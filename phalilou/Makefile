@@ -6,7 +6,7 @@
 #    By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 13:33:54 by croy              #+#    #+#              #
-#    Updated: 2023/07/31 14:02:01 by croy             ###   ########lyon.fr    #
+#    Updated: 2023/07/31 14:20:47 by croy             ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ RM := rm -rf
 # --------- PROJECT VARIABLES ---------
 NAME := philo
 HEADER := $(HDR_FOLDER)/philo.h
-SRC_FILES := main.c
+SRC_FILES := free.c init.c main.c simulation.c utils.c
 
 
 # -------------- RECIPES --------------
