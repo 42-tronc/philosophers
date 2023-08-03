@@ -79,7 +79,9 @@ int	init_philo(t_data *data)
 	data->forks = malloc(sizeof(int) * data->nb_philo);
 	if (!data->forks)
 		return (free(data->philos), EXIT_FAILURE);
-
+	i = 0;
+	while (i < data->nb_philo)
+		data->forks[i++] = 0;
 	// Create the mutexes
 	if (init_mutexes(data))
 		return (free(data->philos), free(data->forks), EXIT_FAILURE);
