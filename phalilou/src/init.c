@@ -41,15 +41,6 @@ int	init_data(t_data *data, char **av)
 	return (0);
 }
 
-void	destroy_mutexes(t_data *data, int i)
-{
-	pthread_mutex_destroy(&data->print_mutex);
-	pthread_mutex_destroy(&data->alive_mutex);
-	while (i >= 0)
-		pthread_mutex_destroy(&data->fork_mutexes[i--]);
-	// free(data->fork_mutexes);
-}
-
 int	init_mutexes(t_data *data)
 {
 	int	i;

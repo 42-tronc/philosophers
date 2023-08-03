@@ -18,17 +18,14 @@ void	free_data(t_data *data)
 	free(data->forks);
 }
 
-void	free_mutexes(t_data *data)
+void	destroy_mutexes(t_data *data, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		pthread_mutex_destroy(&data->fork_mutexes[i]);
-		i++;
-	}
-	free(data->fork_mutexes);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->alive_mutex);
+	while (i >= 0)
+	{
+		printf("destroying mutex %d\n", i);
+		pthread_mutex_destroy(&data->fork_mutexes[i--]);
+	}
+	free(data->fork_mutexes);
 }
