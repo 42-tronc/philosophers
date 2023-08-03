@@ -36,8 +36,6 @@ int	main(int ac, char **av)
 	if (launch_simulation(&data))
 		exit_status = EXIT_FAILURE;
 	
-	// gettimeofday(&data.start_time, NULL); // get start time of simulation
-	// // launch_simulation(&data, philos);
 	destroy_mutexes(&data, data.nb_philo - 1);
 	free_data(&data);
 	return (exit_status);
