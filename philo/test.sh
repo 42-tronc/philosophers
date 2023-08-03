@@ -4,6 +4,7 @@ cyan="\e[36m"
 bold="\e[1m"
 unbold="\e[21m"
 reset="\e[0m"
+set -e # Exit immediately if a command exits with a non-zero status
 
 
 # Function to build the project
