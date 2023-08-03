@@ -85,6 +85,9 @@ NAME := philo
 HEADER := $(HDR_FOLDER)/philo.h
 SRC_FILES := free.c init.c main.c simulation.c utils.c
 
+ARG ?= 10 500 200 200 10
+# DELETE ME
+
 
 # -------------- RECIPES --------------
 all: $(NAME)
