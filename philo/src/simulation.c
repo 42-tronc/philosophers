@@ -24,6 +24,15 @@ void	*philo_routine(t_philo *philo)
 	return (NULL);
 }
 
+static void	debug_change_data(t_data *data)
+{
+	// usleep(800);
+	pthread_mutex_lock(&data->data_mutex);
+	data->all_alive = 0;
+	printf("faking a death\n");
+	pthread_mutex_unlock(&data->data_mutex);
+}
+
 int	launch_simulation(t_data *data)
 {
 	int	i;
@@ -35,7 +44,7 @@ int	launch_simulation(t_data *data)
 			return (destroy_mutexes(data, i), EXIT_FAILURE);
 		i++;
 	}
-	gettimeofday(&data->start_time, NULL);
+	// debug_change_data(data);
 	close_threads(data);
 	return (EXIT_SUCCESS);
 }
