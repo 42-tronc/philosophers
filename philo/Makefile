@@ -75,8 +75,8 @@ HDR_FOLDER := header/
 SRC = $(addprefix $(SRC_FOLDER), $(SRC_FILES))
 OBJ = $(subst $(SRC_FOLDER),$(OBJ_FOLDER),$(SRC:.c=.o))
 
-CFLAGS := -Wall -Wextra -Werror -pthread -I./$(HDR_FOLDER)
-FSANITIZE := -fsanitize=thread -g3
+CFLAGS := -Wall -Wextra -Werror -pthread -g3 -I./$(HDR_FOLDER)
+FSANITIZE := -fsanitize=thread
 RM := rm -rf
 
 
