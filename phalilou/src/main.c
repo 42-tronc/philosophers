@@ -24,16 +24,21 @@ void	print_error(int code, char *source)
 
 int	main(int ac, char **av)
 {
+	int		exit_status;
 	t_data	data;
 
 	if (ac < 5 || ac > 6)
 		return (printf("Expected: ./philo <nb of philosophers> <time to die> "\
 		"<time to eat> <time to sleep> [meal count required]\n"), 1);
 	if (init_data(&data, av) || init_philo(&data))
-		return (1);
+		return (EXIT_FAILURE);
+	exit_status = EXIT_SUCCESS;
+	// if (launch_simulation(&data))
+	// 	exit_status = EXIT_FAILURE;
+	
 	// gettimeofday(&data.start_time, NULL); // get start time of simulation
 	// // launch_simulation(&data, philos);
-	free_mutexes(&data);
+	destroy_mutexes(&data, data.nb_philo - 1);
 	free_data(&data);
-	return (0);
+	return (exit_status);
 }
