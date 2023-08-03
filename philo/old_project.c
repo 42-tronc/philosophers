@@ -45,7 +45,7 @@ void	print_status(t_philo philo, int status_code)
  * @param data t_data struct
  * @param philos t_philo struct array containing each philo
  */
-void	launch_simulation(t_data *data, t_philo *philos)
+void	start_sim(t_data *data, t_philo *philos)
 {
 	int				i;
 	pthread_t		*threads;
@@ -307,7 +307,7 @@ typedef struct s_philo
 long	get_time(struct timeval time);
 void	print_status(t_philo philo, int status_code);
 t_philo	*init_data(t_data *data);
-void	launch_simulation(t_data *data, t_philo *philos);
+void	start_sim(t_data *data, t_philo *philos);
 
 // simulation.c
 void	philo_eat(t_philo *philo);
