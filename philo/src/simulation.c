@@ -12,7 +12,7 @@
 
 #include "../header/philo.h"
 
-void	end_simulation(t_data *data)
+void	close_threads(t_data *data)
 {
 	int	i;
 

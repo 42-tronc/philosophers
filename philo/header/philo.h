@@ -77,7 +77,7 @@ int	init_philo(t_data *data);
 void	print_error(int code, char *source);
 
 // simulation.c
-void	end_simulation(t_data *data);
+void	close_threads(t_data *data);
 
 // utils.c
 int	ft_atoi(const char *str);
