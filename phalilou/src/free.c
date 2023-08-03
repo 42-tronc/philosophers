@@ -23,9 +23,6 @@ void	destroy_mutexes(t_data *data, int i)
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->alive_mutex);
 	while (i >= 0)
-	{
-		printf("destroying mutex %d\n", i);
 		pthread_mutex_destroy(&data->fork_mutexes[i--]);
-	}
 	free(data->fork_mutexes);
 }
