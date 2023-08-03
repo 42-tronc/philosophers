@@ -122,7 +122,6 @@ run : all
 
 valgrind: all
 	@valgrind --tool=helgrind ./$(NAME) $(ARG)
-	@echo -e "\n\n\n"
 	@valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG) 2>&1 | \
 		tee valgrind_output.tmp | \
 		grep -q -E "definitely lost: [1-9]|indirectly lost: [1-9]|possibly lost: [1-9]|still reachable: [1-9]" \
