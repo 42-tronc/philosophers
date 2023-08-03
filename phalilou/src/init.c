@@ -50,7 +50,6 @@ int	init_mutexes(t_data *data)
 	if (pthread_mutex_init(&data->alive_mutex, NULL))
 		return (print_error(E_MUTEX, "init_mutexes"), \
 		pthread_mutex_destroy(&data->print_mutex), EXIT_FAILURE);
-	// data->fork_mutexes = NULL;
 	data->fork_mutexes = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->fork_mutexes)
 		return (print_error(E_MALLOC, "init_mutexes"), \
