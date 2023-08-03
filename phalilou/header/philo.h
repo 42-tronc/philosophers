@@ -21,6 +21,14 @@
 typedef struct s_data	t_data;
 typedef struct s_philo	t_philo;
 
+typedef enum e_state
+{
+	THINKING,
+	FORK,
+	EATING,
+	SLEEPING,
+	DIED,
+}	t_state;
 
 typedef enum e_error
 {
