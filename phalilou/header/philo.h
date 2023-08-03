@@ -23,14 +23,14 @@ typedef struct s_philo	t_philo;
 
 struct s_data
 {
-	long			all_alive;
+	int				all_alive;
+	int				*forks;
 	long			nb_philo;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			meal_limit;
 	long			still_hungry;
-	long			*forks;
 	struct timeval	start_time;
 	pthread_mutex_t	*fork_mutexes;
 	pthread_mutex_t	print_mutex;
