@@ -33,8 +33,8 @@ int	main(int ac, char **av)
 	if (init_data(&data, av) || init_philo(&data))
 		return (EXIT_FAILURE);
 	exit_status = EXIT_SUCCESS;
-	// if (launch_simulation(&data))
-	// 	exit_status = EXIT_FAILURE;
+	if (launch_simulation(&data))
+		exit_status = EXIT_FAILURE;
 	
 	// gettimeofday(&data.start_time, NULL); // get start time of simulation
 	// // launch_simulation(&data, philos);

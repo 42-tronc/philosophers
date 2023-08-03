@@ -78,6 +78,8 @@ void	print_error(int code, char *source);
 
 // simulation.c
 void	close_threads(t_data *data);
+void	*philo_routine(t_philo *philo);
+int	launch_simulation(t_data *data);
 
 // utils.c
 int	ft_atoi(const char *str);
