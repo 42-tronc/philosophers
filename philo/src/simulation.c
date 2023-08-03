@@ -12,18 +12,6 @@
 
 #include "../header/philo.h"
 
-void	close_threads(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		pthread_join(data->philos[i].thread, NULL);
-		i++;
-	}
-}
-
 void	*philo_routine(t_philo *philo)
 {
 	// while (1)

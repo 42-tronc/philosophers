@@ -26,3 +26,15 @@ void	destroy_mutexes(t_data *data, int i)
 		pthread_mutex_destroy(&data->fork_mutexes[i--]);
 	free(data->fork_mutexes);
 }
+
+void	close_threads(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_join(data->philos[i].thread, NULL);
+		i++;
+	}
+}

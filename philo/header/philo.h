@@ -67,6 +67,7 @@ struct s_philo
 // free.c
 void	free_data(t_data *data);
 void	destroy_mutexes(t_data *data, int i);
+void	close_threads(t_data *data);
 
 // init.c
 int	init_data(t_data *data, char **av);
@@ -77,7 +78,6 @@ int	init_philo(t_data *data);
 void	print_error(int code, char *source);
 
 // simulation.c
-void	close_threads(t_data *data);
 void	*philo_routine(t_philo *philo);
 int	launch_simulation(t_data *data);
 
