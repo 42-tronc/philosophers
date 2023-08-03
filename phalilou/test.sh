@@ -31,7 +31,7 @@ run_memcheck_test() {
 build_project
 
 # Test multiple sets of arguments
-declare -a test_args=("10 500 200 200 10" "5 200 100 100 5" "20 1000 500 500 20")
+declare -a test_args=("10 500 200 200 10" "5 300 100 100 5" "20 1100 500 500 20")
 
 for args in "${test_args[@]}"; do
     echo -e "\n\n${cyan}Testing with arguments: ${bold}$args$reset"
