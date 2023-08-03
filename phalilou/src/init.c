@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/07/31 14:09:50 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/03 17:54:35 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,20 @@ int	init_mutexes(t_data *data)
 	int	i;
 
 	if (pthread_mutex_init(&data->print_mutex, NULL))
-		return (EXIT_FAILURE);
+		return (print_error(E_MUTEX, "init_mutexes"), EXIT_FAILURE);
 	if (pthread_mutex_init(&data->alive_mutex, NULL))
-		return (pthread_mutex_destroy(&data->print_mutex), EXIT_FAILURE);
+		return (print_error(E_MUTEX, "init_mutexes"), \
+		pthread_mutex_destroy(&data->print_mutex), EXIT_FAILURE);
+	// data->fork_mutexes = NULL;
 	data->fork_mutexes = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!data->fork_mutexes)
+		return (print_error(E_MALLOC, "init_mutexes"), \
+		destroy_mutexes(data, -1), EXIT_FAILURE);
 	i = 0;
 	while (i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&data->fork_mutexes[i], NULL))
-			return (destroy_mutexes(data, i - 1), EXIT_FAILURE);
+			return (print_error(E_MUTEX, "init_mutexes"), destroy_mutexes(data, i - 1), EXIT_FAILURE);
 		i++;
 	}
 	return (0);

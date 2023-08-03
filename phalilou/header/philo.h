@@ -21,6 +21,14 @@
 typedef struct s_data	t_data;
 typedef struct s_philo	t_philo;
 
+
+typedef enum e_error
+{
+	E_MALLOC,
+	E_MUTEX,
+}	t_error;
+
+
 struct s_data
 {
 	int				all_alive;
@@ -57,6 +65,9 @@ int	init_data(t_data *data, char **av);
 void	destroy_mutexes(t_data *data, int i);
 int	init_mutexes(t_data *data);
 int	init_philo(t_data *data);
+
+// main.c
+void	print_error(int code, char *source);
 
 // simulation.c
 void	end_simulation(t_data *data);

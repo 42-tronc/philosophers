@@ -12,6 +12,16 @@
 
 #include "philo.h"
 
+void	print_error(int code, char *source)
+{
+	char	*error[2];
+
+	error[E_MALLOC] = "Malloc failed to allocate a memory space";
+	error[E_MUTEX] = "Mutex failed to initialize";
+	printf("\e[1;31mError: \e[0m");
+	printf("%s in \e[3;34m%s\e[0m\n", error[code], source);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
