@@ -58,11 +58,10 @@ struct s_philo
 //	===== @functions =====
 // free.c
 void	free_data(t_data *data);
-void	free_mutexes(t_data *data);
+void	destroy_mutexes(t_data *data, int i);
 
 // init.c
 int	init_data(t_data *data, char **av);
-void	destroy_mutexes(t_data *data, int i);
 int	init_mutexes(t_data *data);
 int	init_philo(t_data *data);
 
