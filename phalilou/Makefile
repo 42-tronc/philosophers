@@ -121,8 +121,13 @@ run : all
 	./$(NAME) $(ARG)
 
 valgrind: all
-	valgrind --tool=helgrind ./$(NAME) $(ARG)
+	@valgrind --tool=helgrind ./$(NAME) $(ARG)
 	@echo -e "\n\n\n"
-	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG)
+	@valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG) 2>&1 | \
+		tee valgrind_output.tmp | \
+		grep -q -E "definitely lost: [1-9]|indirectly lost: [1-9]|possibly lost: [1-9]|still reachable: [1-9]" \
+		&& (echo -e "\nLEAKS ❌\n" && cat valgrind_output.tmp) \
+		|| echo -e "\nOK ✅"
+	@rm -f valgrind_output.tmp
 
 .PHONY: all clean fclean re debug run valgrind
