@@ -21,6 +21,24 @@ long	get_time_ms(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
+void	print_status(t_philo philo, int status_code)
+{
+	char	*status[5];
+	long	timestamp;
+
+	// pthread_mutex_lock(&philo.philo_mutex);
+	timestamp = get_time_ms() - philo.data->start_time_ms;
+	// pthread_mutex_unlock(&philo.philo_mutex);
+	status[S_THINKING] = "is thinking";
+	status[S_FORK] = "has taken a fork";
+	status[S_EATING] = "is eating";
+	status[S_SLEEPING] = "is sleeping";
+	status[S_DIED] = "\e[31;1mdied 💀💀💀\e[0m";
+	pthread_mutex_lock(&philo.data->print_mutex);
+	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
+	pthread_mutex_unlock(&philo.data->print_mutex);
+}
+
 void	*philo_routine(t_philo *philo)
 {
 	// while (1)
