@@ -50,7 +50,7 @@ struct s_data
 	struct timeval	start_time;
 	pthread_mutex_t	*fork_mutexes;
 	pthread_mutex_t	print_mutex;
-	pthread_mutex_t	alive_mutex;
+	pthread_mutex_t	data_mutex;
 	t_philo			*philos;
 };
 

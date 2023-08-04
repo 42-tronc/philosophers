@@ -47,7 +47,7 @@ int	init_mutexes(t_data *data)
 
 	if (pthread_mutex_init(&data->print_mutex, NULL))
 		return (print_error(E_MUTEX, "init_mutexes"), EXIT_FAILURE);
-	if (pthread_mutex_init(&data->alive_mutex, NULL))
+	if (pthread_mutex_init(&data->data_mutex, NULL))
 		return (print_error(E_MUTEX, "init_mutexes"), \
 		pthread_mutex_destroy(&data->print_mutex), EXIT_FAILURE);
 	data->fork_mutexes = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
@@ -87,6 +87,7 @@ int	init_philo(t_data *data)
 		data->philos[i].meals = 0;
 		gettimeofday(&data->philos[i].last_meal, NULL);
 		data->philos[i].data = data;
+		// pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
 		i++;
 	}
 	return (0);
