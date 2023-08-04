@@ -34,7 +34,8 @@ void	close_threads(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		pthread_join(data->philos[i].thread, NULL);
+		if (pthread_join(data->philos[i].thread, NULL))
+			print_error(E_THREAD, "pthread_join");
 		i++;
 	}
 }
