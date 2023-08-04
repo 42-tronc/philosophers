@@ -12,6 +12,15 @@
 
 #include "../header/philo.h"
 
+long	get_time_ms(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		return (EXIT_FAILURE); // put an error msg
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
 void	*philo_routine(t_philo *philo)
 {
 	// while (1)
@@ -38,6 +47,7 @@ int	launch_simulation(t_data *data)
 	int	i;
 
 	i = 0;
+	data->start_time_ms = get_time_ms();
 	while (i < data->nb_philo)
 	{
 		if (pthread_create(&data->philos[i].thread, NULL, \
