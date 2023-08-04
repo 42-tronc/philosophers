@@ -39,15 +39,42 @@ void	print_status(t_philo philo, int status_code)
 	pthread_mutex_unlock(&philo.data->print_mutex);
 }
 
+void	philo_thinking(t_philo *philo)
+{
+	print_status(*philo, S_THINKING);
+}
+
+void	philo_eating(t_philo *philo)
+{
+	print_status(*philo, S_FORK);
+	print_status(*philo, S_FORK);
+	print_status(*philo, S_EATING);
+	usleep(philo->data->time_to_eat * 1000);
+}
+
+void	philo_sleeping(t_philo *philo)
+{
+	print_status(*philo, S_SLEEPING);
+	usleep(philo->data->time_to_sleep * 1000);
+}
+
+int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
+{	
+	int	alive;
+
+	pthread_mutex_lock(&philo->data->data_mutex);
+	alive = philo->data->all_alive;
+	pthread_mutex_unlock(&philo->data->data_mutex);
+	if (alive)
+		fn(philo);
+	return (alive);
+}
+
 void	*philo_routine(t_philo *philo)
 {
-	// while (1)
-	// {
-	// 	philo_eat(philo);
-	// 	philo_sleep(philo);
-	// 	philo_think(philo);
-	// }
-	printf("philo %ld will do its routine\n", philo->id);
+	do_if_alive(philo, &philo_thinking);
+	do_if_alive(philo, &philo_eating);
+	do_if_alive(philo, &philo_sleeping);
 	return (NULL);
 }
 

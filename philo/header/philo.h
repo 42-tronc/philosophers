@@ -16,6 +16,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <sys/time.h>
 
 typedef struct s_data	t_data;
@@ -23,17 +24,18 @@ typedef struct s_philo	t_philo;
 
 typedef enum e_state
 {
-	THINKING,
-	FORK,
-	EATING,
-	SLEEPING,
-	DIED,
+	S_THINKING,
+	S_FORK,
+	S_EATING,
+	S_SLEEPING,
+	S_DIED,
 }	t_state;
 
 typedef enum e_error
 {
 	E_MALLOC,
 	E_MUTEX,
+	E_THREAD,
 }	t_error;
 
 
@@ -47,7 +49,8 @@ struct s_data
 	long			time_to_sleep;
 	long			meal_limit;
 	long			still_hungry;
-	struct timeval	start_time;
+	// struct timeval	start_time;
+	long			start_time_ms;
 	pthread_mutex_t	*fork_mutexes;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	data_mutex;
@@ -60,6 +63,7 @@ struct s_philo
 	long			meals;
 	struct timeval	last_meal;
 	pthread_t		thread;
+	pthread_mutex_t	philo_mutex;
 	t_data			*data;
 };
 
