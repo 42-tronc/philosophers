@@ -40,7 +40,8 @@ int	launch_simulation(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (pthread_create(&data->philos[i].thread, NULL, (void *)philo_routine, &data->philos[i]))
+		if (pthread_create(&data->philos[i].thread, NULL, \
+			(void *)philo_routine, &data->philos[i]))
 			return (destroy_mutexes(data, i), EXIT_FAILURE);
 		i++;
 	}
