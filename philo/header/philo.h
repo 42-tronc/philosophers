@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/07/31 11:36:24 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/09 09:53:51 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ int	init_philo(t_data *data);
 void	print_error(int code, char *source);
 
 // simulation.c
+long	get_time_ms(void);
+void	print_status(t_philo philo, int status_code);
+void	philo_thinking(t_philo *philo);
+void	philo_eating(t_philo *philo);
+void	philo_sleeping(t_philo *philo);
+int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo));
 void	*philo_routine(t_philo *philo);
 int	launch_simulation(t_data *data);
 
