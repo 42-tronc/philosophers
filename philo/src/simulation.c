@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maplepy <maplepy@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 09:54:48 by maplepy           #+#    #+#             */
-/*   Updated: 2023/07/31 10:38:25 by maplepy          ###   ########lyon.fr   */
+/*   Updated: 2023/08/09 14:26:59 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	philo_sleeping(t_philo *philo)
 }
 
 int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
-{	
+{
 	int	alive;
 
 	pthread_mutex_lock(&philo->data->data_mutex);
@@ -90,9 +90,19 @@ int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
 
 void	*philo_routine(t_philo *philo)
 {
-	do_if_alive(philo, &philo_thinking);
-	do_if_alive(philo, &philo_eating);
-	do_if_alive(philo, &philo_sleeping);
+	int	alive;
+
+	alive = 1;
+	while (alive)
+	{
+		alive = do_if_alive(philo, &philo_thinking);
+		if (alive == -1) // maybe useless
+			break ; // maybe useless
+		alive = do_if_alive(philo, &philo_eating);
+		if (alive == -1) // maybe useless
+			break ; // maybe useless
+		alive = do_if_alive(philo, &philo_sleeping);
+	}
 	return (NULL);
 }
 
