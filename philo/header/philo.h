@@ -36,11 +36,13 @@ typedef enum e_error
 	E_MALLOC,
 	E_MUTEX,
 	E_THREAD,
+	E_TIME,
 }	t_error;
 
 
 struct s_data
 {
+	int				error;
 	int				all_alive;
 	int				*forks;
 	long			nb_philo;

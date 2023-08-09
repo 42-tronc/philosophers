@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:56:50 by croy              #+#    #+#             */
-/*   Updated: 2023/07/31 14:11:46 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/09 09:44:56 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	print_error(int code, char *source)
 {
-	char	*error[2];
+	char	*error[4];
 
 	error[E_MALLOC] = "Malloc failed to allocate a memory space";
 	error[E_MUTEX] = "Mutex failed to initialize";
+	error[E_THREAD] = "Thread failed to initialize";
+	error[E_TIME] = "Time failed to initialize";
 	printf("\e[1;31mError: \e[0m");
 	printf("%s in \e[3;34m%s\e[0m\n", error[code], source);
 }
@@ -35,7 +37,7 @@ int	main(int ac, char **av)
 	exit_status = EXIT_SUCCESS;
 	if (launch_simulation(&data))
 		exit_status = EXIT_FAILURE;
-	
+
 	destroy_mutexes(&data, data.nb_philo - 1);
 	free_data(&data);
 	return (exit_status);
