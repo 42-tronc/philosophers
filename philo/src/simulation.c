@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 09:54:48 by maplepy           #+#    #+#             */
-/*   Updated: 2023/08/09 14:26:59 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/09 15:00:59 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,13 @@ void	philo_eating(t_philo *philo)
 {
 	print_status(*philo, S_FORK);
 	print_status(*philo, S_FORK);
+
+	// Eating
 	print_status(*philo, S_EATING);
+	philo->last_meal = get_time_ms();
+	// printf("philo %ld last meal: %ld\n", philo->id, philo->last_meal);
 	usleep(philo->data->time_to_eat * 1000);
+	philo->meals++;
 }
 
 void	philo_sleeping(t_philo *philo)

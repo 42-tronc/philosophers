@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/08/09 09:54:16 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/09 14:52:40 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	init_philo(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].meals = 0;
-		gettimeofday(&data->philos[i].last_meal, NULL);
+		// gettimeofday(&data->philos[i].last_meal, NULL);
+		data->philos[i].last_meal = get_time_ms();
 		data->philos[i].data = data;
 		// pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
 		i++;
