@@ -6,11 +6,12 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 09:54:48 by maplepy           #+#    #+#             */
-/*   Updated: 2023/08/09 15:00:59 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/09 15:02:25 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+#pragma GCC diagnostic ignored "-Wunused-function"
 
 long	get_time_ms(void)
 {
@@ -76,6 +77,7 @@ void	philo_sleeping(t_philo *philo)
 	usleep(philo->data->time_to_sleep * 1000);
 }
 
+// maybe add a check of the meal count before doing the fn
 int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
 {
 	int	alive;
