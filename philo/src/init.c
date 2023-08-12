@@ -95,7 +95,6 @@ int	init_philo(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 		data->forks[i++] = 0;
-	// Create the mutexes
 	if (init_mutexes(data))
 		return (free(data->philos), free(data->forks), EXIT_FAILURE);
 	i = 0;
@@ -103,7 +102,6 @@ int	init_philo(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].meals = 0;
-		// gettimeofday(&data->philos[i].last_meal, NULL);
 		data->philos[i].last_meal = get_time_ms();
 		data->philos[i].data = data;
 		get_forks_id(&data->philos[i]);
