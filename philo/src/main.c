@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:56:50 by croy              #+#    #+#             */
-/*   Updated: 2023/08/09 09:44:56 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 13:44:55 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,12 @@ int	main(int ac, char **av)
 	free_data(&data);
 	return (exit_status);
 }
+
+/* TODO
+
+- protect all mallocs
+- protect all mutexes
+- protect all threads
+- protect overflows
+
+*/

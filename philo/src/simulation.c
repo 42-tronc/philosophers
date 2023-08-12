@@ -12,6 +12,7 @@
 
 #include "../header/philo.h"
 #pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wunused-variable"
 
 long	get_time_ms(void)
 {
@@ -47,6 +48,9 @@ void	print_status(t_philo philo, int status_code)
 	status[S_SLEEPING] = "is sleeping";
 	status[S_DIED] = "\e[31;1mdied 💀💀💀\e[0m";
 	pthread_mutex_lock(&philo.data->print_mutex);
+	// (void) timestamp;
+	// (void) status;
+	// (void) status_code;
 	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print_mutex);
 }
