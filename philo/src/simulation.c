@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 09:54:48 by maplepy           #+#    #+#             */
-/*   Updated: 2023/08/12 14:24:13 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 16:21:31 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,60 @@ void	print_status(t_philo philo, int status_code)
 	pthread_mutex_unlock(&philo.data->print_mutex);
 }
 
-void	philo_thinking(t_philo *philo)
+int	philo_thinking(t_philo *philo)
 {
 	print_status(*philo, S_THINKING);
+	return (0);
 }
 
-void	philo_eating(t_philo *philo)
+int	philo_take_forks(t_philo *philo)
 {
-	print_status(*philo, S_FORK);
-	print_status(*philo, S_FORK);
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->first_fork]);
+	if (philo->data->forks[philo->first_fork] == 0)
+	{
+		philo->data->forks[philo->first_fork] = philo->id;
+		philo->forks_taken++;
+		print_status(*philo, S_FORK);
+	}
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->first_fork]);
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->second_fork]);
+	if (philo->data->forks[philo->second_fork] == 0)
+	{
+		philo->data->forks[philo->second_fork] = philo->id;
+		philo->forks_taken++;
+		print_status(*philo, S_FORK);
+	}
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->second_fork]);
+	if (philo->forks_taken == 2)
+		return (philo->forks_taken = 0, 2);
+	return (1);
+}
 
+int	philo_eating(t_philo *philo)
+{
 	// Eating
 	print_status(*philo, S_EATING);
+	printf("last meal: %ld\n", get_time_ms() - philo->last_meal);
 	philo->last_meal = get_time_ms();
-	// printf("philo %ld last meal: %ld\n", philo->id, philo->last_meal);
 	usleep(philo->data->time_to_eat * 1000);
 	philo->meals++;
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->first_fork]);
+	philo->data->forks[philo->first_fork] = 0;
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->first_fork]);
+	pthread_mutex_lock(&philo->data->fork_mutexes[philo->second_fork]);
+	philo->data->forks[philo->second_fork] = 0;
+	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->second_fork]);
+	return (1);
 }
 
-void	philo_sleeping(t_philo *philo)
+int	philo_sleeping(t_philo *philo)
 {
 	print_status(*philo, S_SLEEPING);
 	usleep(philo->data->time_to_sleep * 1000);
+	return (1);
 }
 
-// maybe add a check of the meal count before doing the fn
-int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
+int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 {
 	int	alive;
 	int	meals_eaten;
@@ -95,7 +123,7 @@ int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
 	meals_limit = philo->data->meal_limit;
 	pthread_mutex_unlock(&philo->data->data_mutex);
 	if (alive && (meals_limit && meals_eaten < meals_limit))
-		fn(philo);
+		return (fn(philo));
 	else if (meals_limit && meals_eaten >= meals_limit)
 	{
 		printf("philo %ld has eaten %ld/%ld\n", philo->id, philo->meals, philo->data->meal_limit);
@@ -109,11 +137,16 @@ void	*philo_routine(t_philo *philo)
 	int	alive;
 
 	alive = 1;
+	if (philo->id % 2 == 0) // make even philos wait a bit before starting
+		usleep(philo->data->time_to_eat * 0.8 * 1000);
 	while (alive)
 	{
 		alive = do_if_alive(philo, &philo_thinking);
 		if (alive == -1) // maybe useless
 			break ; // maybe useless
+		while (do_if_alive(philo, &philo_take_forks) == 1)
+			usleep(1000); // sleep 1ms if forks arent available
+
 		alive = do_if_alive(philo, &philo_eating);
 		if (alive == -1) // maybe useless
 			break ; // maybe useless

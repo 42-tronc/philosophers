@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/08/12 14:23:29 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 16:18:40 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,11 @@ void	print_error(int code, char *source);
 // simulation.c
 long	get_time_ms(void);
 void	print_status(t_philo philo, int status_code);
-void	philo_thinking(t_philo *philo);
-void	philo_eating(t_philo *philo);
-void	philo_sleeping(t_philo *philo);
-int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo));
+int	philo_thinking(t_philo *philo);
+int	philo_take_forks(t_philo *philo);
+int	philo_eating(t_philo *philo);
+int	philo_sleeping(t_philo *philo);
+int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo));
 void	*philo_routine(t_philo *philo);
 int	launch_simulation(t_data *data);
 
