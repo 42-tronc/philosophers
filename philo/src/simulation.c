@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 09:54:48 by maplepy           #+#    #+#             */
-/*   Updated: 2023/08/09 15:02:25 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 14:24:13 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	philo_sleeping(t_philo *philo)
 int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
 {
 	int	alive;
+	int	meals_eaten;
+	int	meals_limit;
 
 	pthread_mutex_lock(&philo->data->data_mutex);
 	if (philo->data->error)
@@ -89,9 +91,16 @@ int	do_if_alive(t_philo *philo, void (*fn)(t_philo *philo))
 		return (-1);
 	}
 	alive = philo->data->all_alive;
+	meals_eaten = philo->meals;
+	meals_limit = philo->data->meal_limit;
 	pthread_mutex_unlock(&philo->data->data_mutex);
-	if (alive)
+	if (alive && (meals_limit && meals_eaten < meals_limit))
 		fn(philo);
+	else if (meals_limit && meals_eaten >= meals_limit)
+	{
+		printf("philo %ld has eaten %ld/%ld\n", philo->id, philo->meals, philo->data->meal_limit);
+		alive = 0;
+	}
 	return (alive);
 }
 
