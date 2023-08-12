@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/08/12 12:54:26 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 13:59:39 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static void	get_forks_id(t_philo *philo)
 		philo->first_fork = philo->id % philo->data->nb_philo;
 		philo->second_fork = philo->id - 1;
 	}
+	philo->forks_taken = 0;
 	// printf("Philo '%ld' being %s will lock mutex %ld and %ld\n", philo->id, philo->type == ODD ? "odd" : "even", philo->first_fork, philo->second_fork);
 }
 
