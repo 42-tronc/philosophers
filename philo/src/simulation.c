@@ -69,7 +69,7 @@ int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 	pthread_mutex_unlock(&philo->data->data_mutex);
 	if (alive && (meals_limit && meals_eaten < meals_limit))
 		return (fn(philo));
-	else if (meals_limit && meals_eaten >= meals_limit)
+	else if (alive && meals_limit && meals_eaten >= meals_limit)
 	{
 		printf("philo %ld has eaten %ld/%ld\n", philo->id, philo->meals, philo->data->meal_limit);
 		pthread_mutex_lock(&philo->data->data_mutex);
