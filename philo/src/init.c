@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/08/09 14:52:40 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 12:54:26 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,23 @@ int	init_mutexes(t_data *data)
 	return (0);
 }
 
+static void	get_forks_id(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		philo->type = EVEN;
+		philo->first_fork = philo->id - 1;
+		philo->second_fork = philo->id % philo->data->nb_philo;
+	}
+	else
+	{
+		philo->type = ODD;
+		philo->first_fork = philo->id % philo->data->nb_philo;
+		philo->second_fork = philo->id - 1;
+	}
+	// printf("Philo '%ld' being %s will lock mutex %ld and %ld\n", philo->id, philo->type == ODD ? "odd" : "even", philo->first_fork, philo->second_fork);
+}
+
 int	init_philo(t_data *data)
 {
 	int	i;
@@ -89,6 +106,7 @@ int	init_philo(t_data *data)
 		// gettimeofday(&data->philos[i].last_meal, NULL);
 		data->philos[i].last_meal = get_time_ms();
 		data->philos[i].data = data;
+		get_forks_id(&data->philos[i]);
 		// pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
 		i++;
 	}

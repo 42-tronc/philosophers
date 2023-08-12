@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: maplepy <maplepy@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/08/09 14:51:38 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 12:30:31 by maplepy          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+
+# define EVEN 0
+# define ODD 1
 
 typedef struct s_data	t_data;
 typedef struct s_philo	t_philo;
@@ -61,9 +64,12 @@ struct s_data
 
 struct s_philo
 {
+	int				type;
 	long			id;
 	long			meals;
 	long			last_meal;
+	long			first_fork;
+	long			second_fork;
 	pthread_t		thread;
 	pthread_mutex_t	philo_mutex;
 	t_data			*data;
