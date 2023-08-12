@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/08/12 13:59:39 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/12 16:56:50 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	init_philo(t_data *data)
 		data->philos[i].last_meal = get_time_ms();
 		data->philos[i].data = data;
 		get_forks_id(&data->philos[i]);
-		// pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
+		pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
 		i++;
 	}
 	return (0);
