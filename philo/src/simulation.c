@@ -31,7 +31,6 @@ void	print_status(t_philo philo, int status_code)
 	long	time_now;
 	long	timestamp;
 
-	// pthread_mutex_lock(&philo.philo_mutex);
 	time_now = get_time_ms();
 	pthread_mutex_lock(&philo.data->data_mutex);
 	if (philo.data->error || time_now == -1)
@@ -42,7 +41,6 @@ void	print_status(t_philo philo, int status_code)
 	}
 	timestamp = time_now - philo.data->start_time_ms;
 	pthread_mutex_unlock(&philo.data->data_mutex);
-	// pthread_mutex_unlock(&philo.philo_mutex);
 	status[S_THINKING] = "is thinking";
 	status[S_FORK] = "has taken a fork";
 	status[S_EATING] = "is eating";
