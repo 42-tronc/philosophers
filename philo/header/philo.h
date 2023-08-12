@@ -77,6 +77,12 @@ struct s_philo
 };
 
 //	===== @functions =====
+// actions.c
+int	philo_thinking(t_philo *philo);
+int	philo_take_forks(t_philo *philo);
+int	philo_eating(t_philo *philo);
+int	philo_sleeping(t_philo *philo);
+
 // free.c
 void	free_data(t_data *data);
 void	destroy_mutexes(t_data *data, int i);
@@ -93,10 +99,6 @@ void	print_error(int code, char *source);
 // simulation.c
 long	get_time_ms(void);
 void	print_status(t_philo philo, int status_code);
-int	philo_thinking(t_philo *philo);
-int	philo_take_forks(t_philo *philo);
-int	philo_eating(t_philo *philo);
-int	philo_sleeping(t_philo *philo);
 int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo));
 void	*philo_routine(t_philo *philo);
 int	launch_simulation(t_data *data);
