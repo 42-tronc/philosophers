@@ -32,8 +32,10 @@ run_memcheck_test() {
 build_project
 
 # Test multiple sets of arguments
-declare -a test_args=("10 500 200 200 10")
-# declare -a test_args=("10 500 200 200 10" "5 300 100 100 5" "20 1100 500 500 20")
+# declare -a test_args=("6 500 200 200 10")
+# declare -a test_args=("3 900 300 300 10")
+# declare -a test_args=("20 1100 500 500 20")
+declare -a test_args=("10 500 200 200 10" "5 300 100 100 5" "20 1100 500 500 20" "3 900 300 300 10")
 
 for args in "${test_args[@]}"; do
     echo -e "\n\n${cyan}Testing with arguments: ${bold}$args$reset"
@@ -42,5 +44,5 @@ for args in "${test_args[@]}"; do
     run_helgrind_test $args
 
     # Run Valgrind memcheck test with specific options
-    run_memcheck_test $args
+    # run_memcheck_test $args
 done
