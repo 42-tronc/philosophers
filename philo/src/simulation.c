@@ -72,6 +72,9 @@ int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 	else if (meals_limit && meals_eaten >= meals_limit)
 	{
 		printf("philo %ld has eaten %ld/%ld\n", philo->id, philo->meals, philo->data->meal_limit);
+		pthread_mutex_lock(&philo->data->data_mutex);
+		philo->data->still_hungry--;
+		pthread_mutex_unlock(&philo->data->data_mutex);
 		alive = 0;
 	}
 	return (alive);
@@ -110,6 +113,45 @@ static void	debug_change_data(t_data *data)
 	printf("faking a death\n");
 }
 
+void	check_death(t_data *data)
+{
+	long	i;
+	long	last_meal;
+
+	while (1)
+	{
+		i = 0;
+		while (i < data->nb_philo)
+		{
+			pthread_mutex_lock(&data->data_mutex);
+			if (data->all_alive == 0 || data->still_hungry == 0)
+			{
+				pthread_mutex_unlock(&data->data_mutex);
+				return ;
+			}
+			pthread_mutex_unlock(&data->data_mutex);
+
+			pthread_mutex_lock(&data->philos[i].philo_mutex);
+			pthread_mutex_lock(&data->data_mutex);
+			last_meal = get_time_ms() - data->philos[i].last_meal;
+			if (last_meal > data->time_to_die)
+			{
+				data->all_alive = 0;
+				pthread_mutex_unlock(&data->data_mutex);
+				pthread_mutex_unlock(&data->philos[i].philo_mutex);
+				print_status(data->philos[i], S_DIED);
+				// printf("last meal: %ld / %ld\n", last_meal, data->time_to_die);
+				return ;
+			}
+			pthread_mutex_unlock(&data->data_mutex);
+			pthread_mutex_unlock(&data->philos[i].philo_mutex);
+
+			usleep(1000 * 10); // sleep 10ms
+			i++;
+		}
+	}
+}
+
 int	launch_simulation(t_data *data)
 {
 	int	i;
@@ -124,6 +166,7 @@ int	launch_simulation(t_data *data)
 		i++;
 	}
 	// debug_change_data(data);
+	check_death(data);
 	close_threads(data);
 	if (data->error)
 		return (EXIT_FAILURE);
