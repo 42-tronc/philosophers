@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/08/12 18:59:18 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 15:45:41 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ struct s_philo
 	long			first_fork;
 	long			second_fork;
 	pthread_t		thread;
-	pthread_mutex_t	philo_mutex;
+	// pthread_mutex_t	philo_mutex;
 	t_data			*data;
 };
 
