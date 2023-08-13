@@ -109,7 +109,11 @@ int	launch_simulation(t_data *data)
 	{
 		if (pthread_create(&data->philos[i].thread, NULL, \
 			(void *)philo_routine, &data->philos[i]))
-			return (destroy_mutexes(data, i), EXIT_FAILURE);
+		{
+			print_error(E_THREAD, "launch_simulation");
+			destroy_mutexes(data, i);
+			return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	close_threads(data);

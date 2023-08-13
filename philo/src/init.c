@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/08/13 17:17:36 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 18:14:44 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	init_philo(t_data *data)
 
 	data->philos = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!data->philos)
-		return (EXIT_FAILURE);
+		return (print_error(E_MALLOC, "init_philo"), EXIT_FAILURE);
 	data->forks = malloc(sizeof(int) * data->nb_philo);
 	if (!data->forks)
-		return (free(data->philos), EXIT_FAILURE);
+		return (print_error(E_MALLOC, "init_philo"), free(data->philos), 1);
 	i = 0;
 	while (i < data->nb_philo)
 		data->forks[i++] = 0;
