@@ -53,7 +53,7 @@ struct s_data
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			meal_limit;
-	long			still_hungry;
+	long			hungry_philos;
 	// struct timeval	start_time;
 	long			start_time_ms;
 	pthread_mutex_t	*fork_mutexes;

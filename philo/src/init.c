@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/08/13 15:45:50 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 16:19:10 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_data(t_data *data, char **av)
 	data->error = 0;
 	data->all_alive = 1;
 	data->nb_philo = ft_atoi(av[1]);
-	data->still_hungry = data->nb_philo;
+	data->hungry_philos = data->nb_philo;
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);

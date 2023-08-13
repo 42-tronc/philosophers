@@ -15,7 +15,7 @@
 int	is_alive(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->data_mutex);
-	if (philo->data->all_alive == 0)
+	if (philo->data->all_alive == 0 || philo->data->hungry_philos == 0)
 	{
 		pthread_mutex_unlock(&philo->data->data_mutex);
 		return (0);
