@@ -78,6 +78,7 @@ struct s_philo
 
 //	===== @functions =====
 // actions.c
+int	is_alive(t_philo *philo);
 int	philo_thinking(t_philo *philo);
 int	philo_take_forks(t_philo *philo);
 int	philo_eating(t_philo *philo);

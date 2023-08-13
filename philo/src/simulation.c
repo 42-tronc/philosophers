@@ -64,10 +64,11 @@ int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 		pthread_mutex_unlock(&philo->data->data_mutex);
 		return (-1);
 	}
-	alive = philo->data->all_alive;
+	// alive = philo->data->all_alive;
 	meals_eaten = philo->meals;
 	meals_limit = philo->data->meal_limit;
 	pthread_mutex_unlock(&philo->data->data_mutex);
+	alive = is_alive(philo);
 	if (alive && (meals_limit && meals_eaten < meals_limit))
 		return (fn(philo));
 	else if (alive && meals_limit && meals_eaten >= meals_limit)

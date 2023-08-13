@@ -12,6 +12,26 @@
 
 #include "../header/philo.h"
 
+int	is_alive(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->data_mutex);
+	if (philo->data->all_alive == 0)
+	{
+		pthread_mutex_unlock(&philo->data->data_mutex);
+		return (0);
+	}
+	pthread_mutex_unlock(&philo->data->data_mutex);
+	if (get_time_ms() - philo->last_meal >= philo->data->time_to_die)
+	{
+		pthread_mutex_lock(&philo->data->data_mutex);
+		philo->data->all_alive = 0;
+		pthread_mutex_unlock(&philo->data->data_mutex);
+		print_status(*philo, S_DIED);
+		return (0);
+	}
+	return (1);
+}
+
 int	philo_thinking(t_philo *philo)
 {
 	print_status(*philo, S_THINKING);
