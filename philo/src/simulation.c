@@ -89,17 +89,16 @@ void	*philo_routine(t_philo *philo)
 	alive = 1;
 	if (philo->id % 2 == 0) // make even philos wait a bit before starting
 		usleep(philo->data->time_to_eat * 0.8 * 1000);
-	while (alive)
+	while (alive == 1)
 	{
 		alive = do_if_alive(philo, &philo_thinking);
-		if (alive == -1) // maybe useless
-			break ; // maybe useless
-		while (do_if_alive(philo, &philo_take_forks) == 1)
-			usleep(1000); // sleep 1ms if forks arent available
-
+		if (alive == -1)
+			return (NULL);
+		while (is_alive(philo) && do_if_alive(philo, &philo_take_forks) == 1)
+			usleep (900);
 		alive = do_if_alive(philo, &philo_eating);
-		if (alive == -1) // maybe useless
-			break ; // maybe useless
+		if (alive == -1)
+			return (NULL);
 		alive = do_if_alive(philo, &philo_sleeping);
 	}
 	return (NULL);
