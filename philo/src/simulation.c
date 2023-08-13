@@ -44,8 +44,8 @@ void	print_status(t_philo philo, int status_code)
 	status[S_FORK] = "has taken a fork";
 	status[S_EATING] = "is eating";
 	status[S_SLEEPING] = "is sleeping";
-	status[S_DIED] = "\e[31;1mdied 💀💀💀\e[0m";
-	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
+	status[S_DIED] = "died";
+	printf("%ld %ld %s\n", timestamp, philo.id, status[status_code]);
 }
 
 static int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
