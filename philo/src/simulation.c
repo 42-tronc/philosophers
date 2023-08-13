@@ -47,9 +47,9 @@ void	print_status(t_philo philo, int status_code)
 	status[S_EATING] = "is eating";
 	status[S_SLEEPING] = "is sleeping";
 	status[S_DIED] = "\e[31;1mdied 💀💀💀\e[0m";
-	pthread_mutex_lock(&philo.data->print_mutex);
+	// pthread_mutex_lock(&philo.data->print_mutex);
 	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
-	pthread_mutex_unlock(&philo.data->print_mutex);
+	// pthread_mutex_unlock(&philo.data->print_mutex);
 }
 
 int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
@@ -64,7 +64,6 @@ int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 		pthread_mutex_unlock(&philo->data->data_mutex);
 		return (-1);
 	}
-	// alive = philo->data->all_alive;
 	meals_eaten = philo->meals;
 	meals_limit = philo->data->meal_limit;
 	pthread_mutex_unlock(&philo->data->data_mutex);

@@ -72,7 +72,6 @@ struct s_philo
 	long			first_fork;
 	long			second_fork;
 	pthread_t		thread;
-	// pthread_mutex_t	philo_mutex;
 	t_data			*data;
 };
 
