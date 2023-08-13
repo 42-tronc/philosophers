@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:44:36 by croy              #+#    #+#             */
-/*   Updated: 2023/08/12 18:44:58 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 16:36:28 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,13 @@ int	philo_take_forks(t_philo *philo)
 
 int	philo_eating(t_philo *philo)
 {
-	// Eating
+	long	start_sleep_ms;
+
+	start_sleep_ms = get_time_ms() - philo->data->start_time_ms;
 	print_status(*philo, S_EATING);
 	philo->last_meal = get_time_ms();
-	usleep(philo->data->time_to_eat * 1000);
+	while (is_alive(philo) && get_time_ms() - philo->data->start_time_ms - start_sleep_ms < philo->data->time_to_eat)
+		usleep(800);
 	philo->meals++;
 
 	// Release the 1st fork
@@ -83,7 +86,11 @@ int	philo_eating(t_philo *philo)
 
 int	philo_sleeping(t_philo *philo)
 {
+	long	start_sleep_ms;
+
+	start_sleep_ms = get_time_ms() - philo->data->start_time_ms;
 	print_status(*philo, S_SLEEPING);
-	usleep(philo->data->time_to_sleep * 1000);
+	while (is_alive(philo) && get_time_ms() - philo->data->start_time_ms - start_sleep_ms < philo->data->time_to_sleep)
+		usleep(800);
 	return (1);
 }
