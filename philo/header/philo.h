@@ -101,7 +101,6 @@ long	get_time_ms(void);
 void	print_status(t_philo philo, int status_code);
 int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo));
 void	*philo_routine(t_philo *philo);
-void	check_death(t_data *data);
 int	launch_simulation(t_data *data);
 
 // utils.c

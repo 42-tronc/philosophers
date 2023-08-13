@@ -48,9 +48,6 @@ void	print_status(t_philo philo, int status_code)
 	status[S_SLEEPING] = "is sleeping";
 	status[S_DIED] = "\e[31;1mdied 💀💀💀\e[0m";
 	pthread_mutex_lock(&philo.data->print_mutex);
-	// (void) timestamp;
-	// (void) status;
-	// (void) status_code;
 	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
 	pthread_mutex_unlock(&philo.data->print_mutex);
 }
@@ -107,55 +104,6 @@ void	*philo_routine(t_philo *philo)
 	return (NULL);
 }
 
-static void	debug_change_data(t_data *data)
-{
-	usleep(1000000);
-	pthread_mutex_lock(&data->data_mutex);
-	// data->all_alive = 0;
-	data->error = 1;
-	pthread_mutex_unlock(&data->data_mutex);
-	printf("faking a death\n");
-}
-
-void	check_death(t_data *data)
-{
-	long	i;
-	long	last_meal;
-
-	while (1)
-	{
-		i = 0;
-		while (i < data->nb_philo)
-		{
-			pthread_mutex_lock(&data->data_mutex);
-			if (data->all_alive == 0 || data->still_hungry == 0)
-			{
-				pthread_mutex_unlock(&data->data_mutex);
-				return ;
-			}
-			pthread_mutex_unlock(&data->data_mutex);
-
-			pthread_mutex_lock(&data->philos[i].philo_mutex);
-			pthread_mutex_lock(&data->data_mutex);
-			last_meal = get_time_ms() - data->philos[i].last_meal;
-			if (last_meal > data->time_to_die)
-			{
-				data->all_alive = 0;
-				pthread_mutex_unlock(&data->data_mutex);
-				pthread_mutex_unlock(&data->philos[i].philo_mutex);
-				print_status(data->philos[i], S_DIED);
-				// printf("last meal: %ld / %ld\n", last_meal, data->time_to_die);
-				return ;
-			}
-			pthread_mutex_unlock(&data->data_mutex);
-			pthread_mutex_unlock(&data->philos[i].philo_mutex);
-
-			usleep(1000 * 10); // sleep 10ms
-			i++;
-		}
-	}
-}
-
 int	launch_simulation(t_data *data)
 {
 	int	i;
@@ -169,8 +117,6 @@ int	launch_simulation(t_data *data)
 			return (destroy_mutexes(data, i), EXIT_FAILURE);
 		i++;
 	}
-	// debug_change_data(data);
-	check_death(data);
 	close_threads(data);
 	if (data->error)
 		return (EXIT_FAILURE);
