@@ -64,7 +64,6 @@ struct s_data
 
 struct s_philo
 {
-	int				type;
 	int				forks_taken;
 	long			id;
 	long			meals;

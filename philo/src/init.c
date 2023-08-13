@@ -69,13 +69,11 @@ static void	get_forks_id(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
-		philo->type = EVEN;
 		philo->first_fork = philo->id - 1;
 		philo->second_fork = philo->id % philo->data->nb_philo;
 	}
 	else
 	{
-		philo->type = ODD;
 		philo->first_fork = philo->id % philo->data->nb_philo;
 		philo->second_fork = philo->id - 1;
 	}
