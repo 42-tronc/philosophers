@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:40:42 by croy              #+#    #+#             */
-/*   Updated: 2023/08/13 15:45:41 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 16:02:15 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ struct s_philo
 {
 	int				forks_taken;
 	long			id;
+	int				hungry;
 	long			meals;
 	long			last_meal;
 	long			first_fork;

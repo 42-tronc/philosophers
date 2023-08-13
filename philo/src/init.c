@@ -101,6 +101,7 @@ int	init_philo(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].meals = 0;
+		data->philos[i].hungry = 1;
 		data->philos[i].last_meal = get_time_ms();
 		data->philos[i].data = data;
 		get_forks_id(&data->philos[i]);
