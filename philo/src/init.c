@@ -6,43 +6,13 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:56:14 by croy              #+#    #+#             */
-/*   Updated: 2023/08/13 16:19:10 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 17:17:36 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-// ignore the variable set but not used warning
-#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-#include "../header/philo.h"
+#include "philo.h"
 
-int	init_data(t_data *data, char **av)
-{
-	data->error = 0;
-	data->all_alive = 1;
-	data->nb_philo = ft_atoi(av[1]);
-	data->hungry_philos = data->nb_philo;
-	data->time_to_die = ft_atoi(av[2]);
-	data->time_to_eat = ft_atoi(av[3]);
-	data->time_to_sleep = ft_atoi(av[4]);
-	if (av[5])
-		data->meal_limit = ft_atoi(av[5]);
-	else
-		data->meal_limit = 0;
-
-	// debug msg
-	// printf("Nb philo = '%ld'\n", data->nb_philo);
-	// printf("Death time = '%ld'\n", data->time_to_die);
-	// printf("Eat time = '%ld'\n", data->time_to_eat);
-	// printf("Sleep time = '%ld'\n", data->time_to_sleep);
-	// printf("Meal limit = '%ld'\n", data->meal_limit);
-	// up to here
-
-	if (data->nb_philo <= 0 || data->time_to_die <= 0 || data->time_to_eat <= 0
-		|| data->time_to_sleep <= 0 || (av[5] && data->meal_limit <= 0))
-		return (printf("\e[31mError: Arguments must be greater than 0\n"), 1);
-	return (0);
-}
-
-int	init_mutexes(t_data *data)
+static int	init_mutexes(t_data *data)
 {
 	int	i;
 
@@ -59,7 +29,8 @@ int	init_mutexes(t_data *data)
 	while (i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&data->fork_mutexes[i], NULL))
-			return (print_error(E_MUTEX, "init_mutexes"), destroy_mutexes(data, i - 1), EXIT_FAILURE);
+			return (print_error(E_MUTEX, "init_mutexes"),
+				destroy_mutexes(data, i - 1), EXIT_FAILURE);
 		i++;
 	}
 	return (0);
@@ -78,7 +49,6 @@ static void	get_forks_id(t_philo *philo)
 		philo->second_fork = philo->id - 1;
 	}
 	philo->forks_taken = 0;
-	// printf("Philo '%ld' being %s will lock mutex %ld and %ld\n", philo->id, philo->type == ODD ? "odd" : "even", philo->first_fork, philo->second_fork);
 }
 
 int	init_philo(t_data *data)
@@ -107,5 +77,24 @@ int	init_philo(t_data *data)
 		get_forks_id(&data->philos[i]);
 		i++;
 	}
+	return (0);
+}
+
+int	init_data(t_data *data, char **av)
+{
+	data->error = 0;
+	data->all_alive = 1;
+	data->nb_philo = ft_atoi(av[1]);
+	data->hungry_philos = data->nb_philo;
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
+	if (av[5])
+		data->meal_limit = ft_atoi(av[5]);
+	else
+		data->meal_limit = 0;
+	if (data->nb_philo <= 0 || data->time_to_die <= 0 || data->time_to_eat <= 0
+		|| data->time_to_sleep <= 0 || (av[5] && data->meal_limit <= 0))
+		return (printf("\e[31mError: Arguments must be greater than 0\n"), 1);
 	return (0);
 }

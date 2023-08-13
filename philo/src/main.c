@@ -6,7 +6,7 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:56:50 by croy              #+#    #+#             */
-/*   Updated: 2023/08/12 13:44:55 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 16:47:54 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,7 @@ int	main(int ac, char **av)
 	exit_status = EXIT_SUCCESS;
 	if (launch_simulation(&data))
 		exit_status = EXIT_FAILURE;
-
 	destroy_mutexes(&data, data.nb_philo - 1);
 	free_data(&data);
 	return (exit_status);
 }
-
-/* TODO
-
-- protect all mallocs
-- protect all mutexes
-- protect all threads
-- protect overflows
-
-*/

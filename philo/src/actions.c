@@ -6,11 +6,11 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:44:36 by croy              #+#    #+#             */
-/*   Updated: 2023/08/13 16:36:28 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 17:17:36 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philo.h"
+#include "philo.h"
 
 int	is_alive(t_philo *philo)
 {
@@ -68,16 +68,13 @@ int	philo_eating(t_philo *philo)
 	start_sleep_ms = get_time_ms() - philo->data->start_time_ms;
 	print_status(*philo, S_EATING);
 	philo->last_meal = get_time_ms();
-	while (is_alive(philo) && get_time_ms() - philo->data->start_time_ms - start_sleep_ms < philo->data->time_to_eat)
+	while (is_alive(philo) && get_time_ms() - philo->data->start_time_ms
+		- start_sleep_ms < philo->data->time_to_eat)
 		usleep(800);
 	philo->meals++;
-
-	// Release the 1st fork
 	pthread_mutex_lock(&philo->data->fork_mutexes[philo->first_fork]);
 	philo->data->forks[philo->first_fork] = 0;
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->first_fork]);
-
-	// Release the 2nd fork
 	pthread_mutex_lock(&philo->data->fork_mutexes[philo->second_fork]);
 	philo->data->forks[philo->second_fork] = 0;
 	pthread_mutex_unlock(&philo->data->fork_mutexes[philo->second_fork]);
@@ -90,7 +87,8 @@ int	philo_sleeping(t_philo *philo)
 
 	start_sleep_ms = get_time_ms() - philo->data->start_time_ms;
 	print_status(*philo, S_SLEEPING);
-	while (is_alive(philo) && get_time_ms() - philo->data->start_time_ms - start_sleep_ms < philo->data->time_to_sleep)
+	while (is_alive(philo) && get_time_ms() - philo->data->start_time_ms
+		- start_sleep_ms < philo->data->time_to_sleep)
 		usleep(800);
 	return (1);
 }

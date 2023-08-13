@@ -6,11 +6,11 @@
 /*   By: croy <croy@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:21:11 by croy              #+#    #+#             */
-/*   Updated: 2023/07/31 11:22:29 by croy             ###   ########lyon.fr   */
+/*   Updated: 2023/08/13 17:17:36 by croy             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philo.h"
+#include "philo.h"
 
 int	ft_atoi(const char *str)
 {

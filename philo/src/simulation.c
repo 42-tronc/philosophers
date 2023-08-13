@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philo.h"
-#pragma GCC diagnostic ignored "-Wunused-function"
-#pragma GCC diagnostic ignored "-Wunused-variable"
+#include "philo.h"
 
 long	get_time_ms(void)
 {
@@ -47,12 +45,10 @@ void	print_status(t_philo philo, int status_code)
 	status[S_EATING] = "is eating";
 	status[S_SLEEPING] = "is sleeping";
 	status[S_DIED] = "\e[31;1mdied 💀💀💀\e[0m";
-	// pthread_mutex_lock(&philo.data->print_mutex);
 	printf("%ldms:\tphilo %ld %s\n", timestamp, philo.id, status[status_code]);
-	// pthread_mutex_unlock(&philo.data->print_mutex);
 }
 
-int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
+static int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 {
 	int	alive;
 	int	meals_eaten;
@@ -70,9 +66,9 @@ int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 	alive = is_alive(philo);
 	if (alive && (!meals_limit || meals_eaten < meals_limit))
 		return (fn(philo));
-	else if (alive && (!meals_limit || (meals_eaten >= meals_limit && philo->hungry)))
+	else if (alive && (!meals_limit
+			|| (meals_eaten >= meals_limit && philo->hungry)))
 	{
-		printf("philo %ld has eaten %ld/%ld\n", philo->id, philo->meals, philo->data->meal_limit);
 		philo->hungry = 0;
 		pthread_mutex_lock(&philo->data->data_mutex);
 		philo->data->hungry_philos--;
@@ -81,12 +77,12 @@ int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
 	return (alive);
 }
 
-void	*philo_routine(t_philo *philo)
+static void	*philo_routine(t_philo *philo)
 {
 	int	alive;
 
 	alive = 1;
-	if (philo->id % 2 == 0) // make even philos wait a bit before starting
+	if (philo->id % 2 == 0)
 		usleep(philo->data->time_to_eat * 0.8 * 1000);
 	while (alive == 1)
 	{
