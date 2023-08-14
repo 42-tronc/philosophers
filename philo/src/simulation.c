@@ -45,7 +45,9 @@ void	print_status(t_philo philo, int status_code)
 	status[S_EATING] = "is eating";
 	status[S_SLEEPING] = "is sleeping";
 	status[S_DIED] = "died";
+	pthread_mutex_lock(&philo.data->print_mutex);
 	printf("%ld %ld %s\n", timestamp, philo.id, status[status_code]);
+	pthread_mutex_unlock(&philo.data->print_mutex);
 }
 
 static int	do_if_alive(t_philo *philo, int (*fn)(t_philo *philo))
